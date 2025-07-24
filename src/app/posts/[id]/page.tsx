@@ -1,5 +1,6 @@
 import { getAllPostIds, getPostData } from '@/lib/posts';
 import { marked } from 'marked';
+import markedFootnote from 'marked-footnote';
 import hljs from 'highlight.js';
 import Link from 'next/link';
 import Header from '@/components/Header';
@@ -53,11 +54,13 @@ export default async function Post({ params }: { params: Params }) {
   const { id } = await params;
   const postData = getPostData(id);
   
-  // Configure marked with GitHub Flavored Markdown
+  // Configure marked with GitHub Flavored Markdown and footnotes
   marked.use({
     gfm: true,
     breaks: true
   });
+  
+  marked.use(markedFootnote());
   
   // Parse markdown and then apply syntax highlighting
   let contentHtml = marked.parse(postData.content) as string;
