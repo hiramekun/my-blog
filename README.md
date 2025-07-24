@@ -2,6 +2,8 @@
 
 バックエンドエンジニアの技術ブログです。Go/Java/Scalaでの開発経験を中心に技術的な内容を共有しています。
 
+🌐 **Live Site**: https://hiramekun.github.io/my-blog/
+
 ## 技術構成
 
 このブログは以下の技術で構築されています：
@@ -29,13 +31,13 @@ my-blog/
 │   ├── first-post.md
 │   └── go-performance-tips.md
 ├── src/
-│   └── app/
-│       ├── page.tsx          # ホームページ（記事一覧）
-│       └── posts/
-│           └── [id]/
-│               └── page.tsx  # 個別記事ページ
-├── lib/
-│   └── posts.ts             # 記事データ処理ユーティリティ
+│   ├── app/
+│   │   ├── page.tsx          # ホームページ（記事一覧）
+│   │   └── posts/
+│   │       └── [id]/
+│   │           └── page.tsx  # 個別記事ページ
+│   └── lib/
+│       └── posts.ts         # 記事データ処理ユーティリティ
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml       # GitHub Actions設定
@@ -193,9 +195,13 @@ Tailwind CSSを使用しているため、既存のクラスを変更するか�
 
 ### ビルドエラーが発生する場合
 
-1. フロントマターの形式を確認してください
-2. 日付形式が `YYYY-MM-DD` になっているか確認してください
-3. `npm run lint` でコードの問題をチェックしてください
+1. **フロントマターの形式**を確認してください
+2. **日付形式**が `YYYY-MM-DD` になっているか確認してください
+3. **パスエイリアス問題**: `@/lib/posts` が解決できない場合
+   - `src/lib/posts.ts` が正しい場所にあるか確認
+   - `tsconfig.json` の `paths` 設定を確認
+4. **依存関係の問題**: `npm run lint` でコードの問題をチェック
+5. **Node.js版本問題**: 必要に応じて `rm -rf node_modules package-lock.json && npm install` で再インストール
 
 ### GitHub Pagesにデプロイされない場合
 

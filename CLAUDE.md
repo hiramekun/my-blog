@@ -18,7 +18,7 @@ This is a **static blog site** built with Next.js 15 + TypeScript, configured fo
 
 ### Blog Content System
 - **Content Location**: All blog posts are stored as Markdown/MDX files in the `posts/` directory
-- **Post Processing**: `lib/posts.ts` contains utilities to read and parse Markdown files using `gray-matter` for frontmatter extraction
+- **Post Processing**: `src/lib/posts.ts` contains utilities to read and parse Markdown files using `gray-matter` for frontmatter extraction
 - **Supported Formats**: Both `.md` and `.mdx` files are supported
 
 ### Post Structure
@@ -45,12 +45,22 @@ The `next.config.ts` is configured for static export with:
 - **Styling**: Tailwind CSS with `@tailwindcss/typography` for Markdown content
 
 ### Content Processing Flow
-1. Markdown files in `posts/` are read by `lib/posts.ts`
+1. Markdown files in `posts/` are read by `src/lib/posts.ts`
 2. Frontmatter is parsed using `gray-matter`
 3. Content is converted to HTML using `remark` and `remark-html`
 4. Posts are sorted by date (newest first)
+
+### TypeScript Configuration
+- **Path Aliases**: `@/*` maps to `./src/*` in `tsconfig.json`
+- **Important**: All utilities must be placed within `src/` directory to work with the path alias
+- **Posts Utility**: Located at `src/lib/posts.ts` (not root `lib/`)
 
 ### GitHub Pages Deployment
 - Builds static files to `out/` directory
 - GitHub Actions workflow deploys on push to `main`
 - Requires GitHub Pages to be configured for "GitHub Actions" source
+- **Live URL**: https://hiramekun.github.io/my-blog/
+
+### Common Issues
+- **Build Error**: `Cannot resolve '@/lib/posts'` means utilities are not in `src/` directory
+- **Node.js Compatibility**: If build fails, try reinstalling dependencies with `rm -rf node_modules package-lock.json && npm install`
