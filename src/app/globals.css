@@ -210,25 +210,13 @@ body {
 }
 
 .prose .footnotes ol {
-  counter-reset: footnote-counter;
-  list-style: none;
-  padding-left: 0;
+  list-style-type: decimal;
+  padding-left: 1.5rem;
 }
 
 .prose .footnotes li {
-  counter-increment: footnote-counter;
   margin: 0.5rem 0;
-  position: relative;
-  padding-left: 2rem;
-}
-
-.prose .footnotes li::before {
-  content: counter(footnote-counter) ".";
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: var(--accent-primary);
-  font-weight: bold;
+  color: var(--text-secondary);
 }
 
 .prose .footnotes li p {

@@ -79,3 +79,46 @@ export function getPostData(id: string): PostData {
     ...matterResult.data,
   } as PostData;
 }
+
+// カテゴリ関連の関数
+export function getAllCategories() {
+  const categories = new Set<string>();
+  const allPosts = getSortedPostsData();
+  allPosts.forEach(post => {
+    if (post.tags) {
+      post.tags.forEach(tag => categories.add(tag));
+    }
+  });
+  return Array.from(categories).sort();
+}
+
+export function getPostsByCategory(category: string) {
+  return getSortedPostsData().filter(post => 
+    post.tags && post.tags.includes(category)
+  );
+}
+
+// アーカイブ関連の関数
+export function getAllArchives() {
+  const archives = new Set<string>();
+  const allPosts = getSortedPostsData();
+  allPosts.forEach(post => {
+    const date = new Date(post.date);
+    const yearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    archives.add(yearMonth);
+  });
+  return Array.from(archives).sort().reverse(); // 新しい順
+}
+
+export function getPostsByArchive(year: string, month: string) {
+  const targetYearMonth = `${year}-${month.padStart(2, '0')}`;
+  return getSortedPostsData().filter(post => {
+    const date = new Date(post.date);
+    const postYearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    return postYearMonth === targetYearMonth;
+  });
+}
+
+export function getArchiveDisplayName(year: string, month: string) {
+  return `${year}年${parseInt(month)}月`;
+}

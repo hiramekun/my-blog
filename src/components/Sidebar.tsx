@@ -46,9 +46,12 @@ export default function Sidebar() {
           <ul className="space-y-2">
             {Array.from(categories).map((category) => (
               <li key={category}>
-                <span className="text-sm text-theme-secondary text-theme-accent-hover cursor-pointer">
+                <a 
+                  href={`/my-blog/category/${encodeURIComponent(category)}/`}
+                  className="text-sm text-theme-secondary text-theme-accent-hover hover:underline"
+                >
                   {category}
-                </span>
+                </a>
               </li>
             ))}
           </ul>
@@ -62,14 +65,25 @@ export default function Sidebar() {
           <ul className="space-y-2">
             {Object.entries(archives)
               .sort(([a], [b]) => b.localeCompare(a))
-              .map(([month, count]) => (
-                <li key={month} className="flex justify-between">
-                  <span className="text-sm text-theme-secondary text-theme-accent-hover cursor-pointer">
-                    {month}
-                  </span>
-                  <span className="text-sm text-theme-tertiary">({count})</span>
-                </li>
-              ))}
+              .map(([month, count]) => {
+                // "2025年6月" から "2025" と "06" を抽出
+                const match = month.match(/(\d{4})年(\d+)月/);
+                if (!match) return null;
+                const [, year, monthNum] = match;
+                const paddedMonth = monthNum.padStart(2, '0');
+                
+                return (
+                  <li key={month} className="flex justify-between">
+                    <a 
+                      href={`/my-blog/archive/${year}/${paddedMonth}/`}
+                      className="text-sm text-theme-secondary text-theme-accent-hover hover:underline"
+                    >
+                      {month}
+                    </a>
+                    <span className="text-sm text-theme-tertiary">({count})</span>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       )}
