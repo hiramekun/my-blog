@@ -54,7 +54,7 @@ export default async function Post({ params }: { params: Params }) {
     <div className="min-h-screen bg-theme-primary">
       <Header />
       
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* メインコンテンツ */}
           <main className="flex-1">
@@ -88,7 +88,7 @@ export default async function Post({ params }: { params: Params }) {
               </header>
               
               <div 
-                className="prose prose-lg max-w-none"
+                className="prose prose-xl max-w-none"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
             </article>

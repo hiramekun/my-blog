@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Header() {
   return (
     <header className="bg-theme-secondary border-b border-theme-primary">
-      <div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 bg-theme-primary rounded-full flex items-center justify-center">
             <span className="text-theme-secondary font-bold text-lg">H</span>

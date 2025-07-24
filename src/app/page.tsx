@@ -10,7 +10,7 @@ export default function Home() {
     <div className="min-h-screen bg-theme-primary">
       <Header />
       
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* メインコンテンツ */}
           <main className="flex-1">
