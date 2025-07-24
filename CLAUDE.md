@@ -1,85 +1,60 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルはClaude Code用のプロジェクト設定です。
 
-## Common Commands
+## コマンド
 
-### Development
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build the static site (outputs to `out/` directory)
-- `npm run lint` - Run ESLint checks
+### 開発
+- `npm run dev` - 開発サーバー起動
+- `npm run build` - 静的サイト生成（`out/`に出力）
+- `npm run lint` - ESLintチェック
 
-### Deployment
-The project auto-deploys to GitHub Pages via GitHub Actions when pushing to the `main` branch. The workflow is defined in `.github/workflows/deploy.yml`.
+### デプロイ
+GitHub Actionsで自動デプロイ（`.github/workflows/deploy.yml`）。`main`ブランチへのpushで自動実行。
 
-## Architecture Overview
+## アーキテクチャ
 
-This is a **static blog site** built with Next.js 15 + TypeScript, configured for static site generation and GitHub Pages deployment.
+**静的ブログサイト** - Next.js 15 + TypeScript + GitHub Pages
 
-### Blog Content System
-- **Content Location**: All blog posts are stored as Markdown/MDX files in the `posts/` directory
-- **Post Processing**: `src/lib/posts.ts` contains utilities to read and parse Markdown files using `gray-matter` for frontmatter extraction
-- **Supported Formats**: Both `.md` and `.mdx` files are supported
+### ブログコンテンツ
+- **記事**: `posts/`ディレクトリのMarkdown/MDXファイル
+- **処理**: `src/lib/posts.ts`で記事読み込み・解析
+- **フロントマター**: `title`, `date`, `excerpt`, `tags`
 
-### Post Structure
-Posts require frontmatter with these fields:
-```yaml
----
-title: "Post Title"
-date: "YYYY-MM-DD"
-excerpt: "Optional excerpt"
-tags: ["tag1", "tag2"]  # Optional
----
-```
+### 静的生成設定
+- `output: "export"` - 静的HTML生成
+- `trailingSlash: true` - GitHub Pages用
+- `basePath: "/my-blog"` - サブパス対応
+- `images: { unoptimized: true }` - 静的エクスポート用
 
-### Static Generation Configuration
-The `next.config.ts` is configured for static export with:
-- `output: "export"` - Generates static HTML files
-- `trailingSlash: true` - Required for GitHub Pages
-- `images: { unoptimized: true }` - Disables Image Optimization for static export
-- MDX support through `@next/mdx`
+### ページ構造
+- **ホーム** (`src/app/page.tsx`): 記事一覧（2カラムレイアウト）
+- **記事** (`src/app/posts/[id]/page.tsx`): 個別記事ページ
+- **アーカイブ** (`src/app/archive/[year]/[month]/page.tsx`): 月別記事一覧
+- **Header/Sidebar** (`src/components/`): 共通コンポーネント
 
-### Page Structure
-- **Home Page** (`src/app/page.tsx`): Lists all blog posts chronologically with 2-column layout
-- **Post Pages** (`src/app/posts/[id]/page.tsx`): Dynamic routes for individual posts using `generateStaticParams()`
-- **Header Component** (`src/components/Header.tsx`): Blog title, profile avatar, and description
-- **Sidebar Component** (`src/components/Sidebar.tsx`): Profile, categories, archives, and recent posts
-- **Styling**: Tailwind CSS + CSS variables in `src/app/globals.css` for dark theme and optimal Markdown rendering
+### デザインシステム
+- **ダークテーマ**: GitHubダークカラーパレット（`src/app/globals.css`）
+- **CSS変数**: テーマ色の一元管理
+- **Markdownレンダリング**: `marked.js` + `highlight.js` + 脚注サポート
+- **レスポンシブ**: 2カラム（デスクトップ）↔ 1カラム（モバイル）
 
-### Design System (Dark Theme)
-- **2-Column Layout**: Main content + functional sidebar (responsive: mobile stacks vertically)
-- **Dark Theme**: CSS variables-based color system for easy theme management
-- **Typography**: High-contrast light text on dark backgrounds for excellent readability
-- **Markdown Rendering**: Custom CSS with `marked.js` + `highlight.js` for proper code syntax highlighting
-- **Color Scheme**: Dark gray backgrounds (#111827, #1f2937) with blue accents (#60a5fa) for links
-- **Code Blocks**: GitHub Dark theme with syntax highlighting for Go/Java/Scala
-- **CSS Variables**: All colors managed through CSS custom properties in `:root` for easy theming
+### 記事処理
+1. `posts/`のMarkdownファイルを`gray-matter`で解析
+2. `marked.js`でHTML変換（GitHub Flavored Markdown + 脚注）
+3. `highlight.js`でシンタックスハイライト適用
+4. 日付順ソート（新しい順）
 
-### Content Processing Flow
-1. Markdown files in `posts/` are read by `src/lib/posts.ts`
-2. Frontmatter is parsed using `gray-matter`
-3. Content is converted to HTML using `marked.js` with GitHub Flavored Markdown support
-4. Syntax highlighting is applied using `highlight.js` with GitHub Dark theme
-5. Posts are sorted by date (newest first)
+## TypeScript設定
+- **パスエイリアス**: `@/*` → `./src/*`
+- **重要**: ユーティリティは`src/`内に配置（`src/lib/posts.ts`）
 
-### TypeScript Configuration
-- **Path Aliases**: `@/*` maps to `./src/*` in `tsconfig.json`
-- **Important**: All utilities must be placed within `src/` directory to work with the path alias
-- **Posts Utility**: Located at `src/lib/posts.ts` (not root `lib/`)
+## GitHub Pages
+- **ライブURL**: https://hiramekun.github.io/my-blog/
+- **デプロイ**: GitHub Actionsで`out/`ディレクトリをデプロイ
+- **設定**: Pages設定を「GitHub Actions」に設定
 
-### GitHub Pages Deployment
-- Builds static files to `out/` directory
-- GitHub Actions workflow deploys on push to `main`
-- Requires GitHub Pages to be configured for "GitHub Actions" source
-- **Live URL**: https://hiramekun.github.io/my-blog/
-
-### Common Issues
-- **Build Error**: `Cannot resolve '@/lib/posts'` means utilities are not in `src/` directory
-- **Node.js Compatibility**: If build fails, try reinstalling dependencies with `rm -rf node_modules package-lock.json && npm install`
-- **Markdown Rendering Issues**: 
-  - Uses `marked.js` (not `remark`) for reliable HTML generation
-  - Syntax highlighting handled by `highlight.js` with manual post-processing
-  - Custom CSS in `globals.css` overrides Tailwind prose classes for better control
-- **Theme Management**: CSS variables in `globals.css` allow easy color scheme changes
-- **Component Styling**: Uses theme-based utility classes (`.bg-theme-primary`, `.text-theme-secondary`) instead of hardcoded Tailwind colors
-- **GitHub Pages Routing**: `basePath: "/my-blog"` in `next.config.ts` is required for proper routing
+## よくある問題
+- **ビルドエラー**: `src/`内にファイルがあるか確認
+- **記事が表示されない**: フロントマターの日付形式を確認（`YYYY-MM-DD`）
+- **画像パス**: 静的ファイルは`public/`に配置、`/my-blog/`プレフィックス必要
