@@ -57,13 +57,25 @@ export default async function Post({ params }: { params: Params }) {
   // Configure marked with GitHub Flavored Markdown and footnotes
   marked.use({
     gfm: true,
-    breaks: true
+    breaks: true,
+    pedantic: false
   });
   
   marked.use(markedFootnote());
   
   // Parse markdown and then apply syntax highlighting
   let contentHtml = marked.parse(postData.content) as string;
+  
+  // Additional post-processing for better bold text recognition
+  // Handle cases where ** is not separated by spaces
+  contentHtml = contentHtml.replace(
+    /([^\s])\*\*([^*]+?)\*\*([^\s])/g,
+    '$1<strong>$2</strong>$3'
+  );
+  contentHtml = contentHtml.replace(
+    /\*\*([^*]+?)\*\*/g,
+    '<strong>$1</strong>'
+  );
   
   // Apply syntax highlighting to code blocks
   contentHtml = contentHtml.replace(
