@@ -3,10 +3,6 @@ import { getSortedPostsData } from '@/lib/posts';
 export default function Sidebar() {
   const allPosts = getSortedPostsData();
   
-  // カテゴリを抽出（タグから）
-  const categories = new Set(
-    allPosts.flatMap(post => post.tags || [])
-  );
   
   // 月別アーカイブを作成
   const archives = allPosts.reduce((acc, post) => {
@@ -39,24 +35,6 @@ export default function Sidebar() {
         </p>
       </div>
 
-      {/* カテゴリ */}
-      {categories.size > 0 && (
-        <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
-          <h3 className="text-lg font-bold text-theme-primary mb-4">カテゴリ</h3>
-          <ul className="space-y-2">
-            {Array.from(categories).map((category) => (
-              <li key={category}>
-                <a 
-                  href={`/my-blog/category/${encodeURIComponent(category)}/`}
-                  className="text-sm text-theme-secondary text-theme-accent-hover hover:underline"
-                >
-                  {category}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       {/* アーカイブ */}
       {Object.keys(archives).length > 0 && (
