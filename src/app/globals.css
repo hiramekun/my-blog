@@ -2,24 +2,24 @@
 @import "highlight.js/styles/github-dark.css";
 
 :root {
-  /* Dark theme color variables */
-  --bg-primary: #111827;      /* gray-900 */
-  --bg-secondary: #1f2937;    /* gray-800 */
-  --bg-tertiary: #374151;     /* gray-700 */
-  --border-primary: #4b5563;  /* gray-600 */
-  --border-secondary: #6b7280; /* gray-500 */
+  /* GitHub dark theme color variables */
+  --bg-primary: #0d1117;      /* GitHub main background */
+  --bg-secondary: #161b22;    /* GitHub secondary background/cards */
+  --bg-tertiary: #21262d;     /* GitHub tertiary background (slightly lighter) */
+  --border-primary: #30363d;  /* GitHub border color */
+  --border-secondary: #21262d; /* GitHub secondary border */
   
-  --text-primary: #f9fafb;    /* gray-50 */
-  --text-secondary: #d1d5db;  /* gray-300 */
-  --text-tertiary: #9ca3af;   /* gray-400 */
+  --text-primary: #f0f6fc;    /* GitHub primary text (white-ish) */
+  --text-secondary: #c9c9c9;  /* GitHub secondary text */
+  --text-tertiary: #8b949e;   /* GitHub muted text */
   
-  --accent-primary: #60a5fa;  /* blue-400 */
-  --accent-hover: #93c5fd;    /* blue-300 */
-  --accent-secondary: #fbbf24; /* yellow-400 */
+  --accent-primary: #58a6ff;  /* GitHub link blue */
+  --accent-hover: #79c0ff;    /* GitHub link hover blue */
+  --accent-secondary: #ffd33d; /* GitHub yellow accent */
   
-  --code-bg: #0d1117;         /* GitHub dark background */
-  --code-text: #e6edf3;       /* GitHub dark text */
-  --inline-code-bg: #374151;  /* gray-700 */
+  --code-bg: #0d1117;         /* GitHub code background */
+  --code-text: #e6edf3;       /* GitHub code text */
+  --inline-code-bg: #21262d;  /* GitHub inline code background */
   
   /* Legacy variables for compatibility */
   --background: var(--bg-primary);
