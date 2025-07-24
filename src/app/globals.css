@@ -30,6 +30,12 @@ body {
 .prose {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   line-height: 1.7;
+}
+
+/* Apply dark color only to text elements, not code blocks */
+.prose > *:not(pre),
+.prose p,
+.prose li {
   color: #1f2937; /* 本文を濃いグレー（ほぼ黒）に */
 }
 
@@ -83,7 +89,23 @@ body {
   padding: 0 !important;
   font-size: 0.875rem;
   line-height: 1.5;
+  color: #e6edf3 !important; /* コードブロック内は明るいグレー */
 }
+
+/* Override prose color for code blocks - ensure highlight.js colors work */
+.prose pre * {
+  color: inherit !important;
+}
+
+/* Specific highlight.js color overrides */
+.prose pre .hljs-keyword { color: #ff7b72 !important; }
+.prose pre .hljs-string { color: #a5d6ff !important; }
+.prose pre .hljs-comment { color: #8b949e !important; }
+.prose pre .hljs-function { color: #d2a8ff !important; }
+.prose pre .hljs-number { color: #79c0ff !important; }
+.prose pre .hljs-type { color: #ffa657 !important; }
+.prose pre .hljs-built_in { color: #ffa657 !important; }
+.prose pre .hljs-variable { color: #ffa657 !important; }
 
 /* Inline code */
 .prose :not(pre) > code {
