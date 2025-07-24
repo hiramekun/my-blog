@@ -60,7 +60,7 @@ export default async function Post({ params }: { params: Params }) {
       try {
         const highlightedCode = hljs.highlight(code, { language: lang }).value;
         return `<pre><code class="language-${lang}">${highlightedCode}</code></pre>`;
-      } catch (err) {
+      } catch {
         return match;
       }
     }
@@ -70,7 +70,7 @@ export default async function Post({ params }: { params: Params }) {
       try {
         const highlightedCode = hljs.highlightAuto(code).value;
         return `<pre><code>${highlightedCode}</code></pre>`;
-      } catch (err) {
+      } catch {
         return match;
       }
     }

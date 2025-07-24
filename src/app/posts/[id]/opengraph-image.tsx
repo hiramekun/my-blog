@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
-import { getPostData } from '@/lib/posts';
 
 export const runtime = 'edge';
+export const dynamic = 'force-static';
 
 export const alt = 'ひらめのブログ';
 export const size = {
@@ -11,12 +11,10 @@ export const size = {
 
 export const contentType = 'image/png';
 
-type Params = Promise<{ id: string }>;
-
-export default async function Image({ params }: { params: Params }) {
-  const { id } = await params;
-  const postData = getPostData(id);
-
+export default async function Image() {
+  // シンプルなデフォルトOGP画像を生成
+  // 記事固有の情報は /api/og?title=...&description=... で対応
+  
   return new ImageResponse(
     (
       <div
@@ -55,7 +53,7 @@ export default async function Image({ params }: { params: Params }) {
             zIndex: 1,
           }}
         >
-          {/* 小さなプロフィール画像エリア */}
+          {/* プロフィール画像エリア */}
           <div
             style={{
               width: '80px',
@@ -103,50 +101,33 @@ export default async function Image({ params }: { params: Params }) {
               maxWidth: '1000px',
             }}
           >
-            {postData.title}
+            ブログ記事をお読みいただき、ありがとうございます
           </div>
           
-          {/* 記事の説明 */}
-          {postData.excerpt && (
-            <div
-              style={{
-                fontSize: '24px',
-                color: '#8b949e',
-                textAlign: 'center',
-                maxWidth: '900px',
-                lineHeight: 1.4,
-              }}
-            >
-              {postData.excerpt}
-            </div>
-          )}
+          {/* 説明 */}
+          <div
+            style={{
+              fontSize: '24px',
+              color: '#8b949e',
+              textAlign: 'center',
+              maxWidth: '900px',
+              lineHeight: 1.4,
+            }}
+          >
+            バックエンドエンジニアの技術メモ
+          </div>
           
-          {/* 日付とURL */}
+          {/* URL */}
           <div
             style={{
               position: 'absolute',
               bottom: '40px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              width: '90%',
+              right: '40px',
+              fontSize: '20px',
+              color: '#58a6ff',
             }}
           >
-            <div
-              style={{
-                fontSize: '20px',
-                color: '#58a6ff',
-              }}
-            >
-              {postData.date}
-            </div>
-            <div
-              style={{
-                fontSize: '20px',
-                color: '#58a6ff',
-              }}
-            >
-              hiramekun.github.io/my-blog
-            </div>
+            hiramekun.github.io/my-blog
           </div>
         </div>
       </div>
