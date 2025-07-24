@@ -30,11 +30,20 @@ export const metadata: Metadata = {
     siteName: "ひらめのブログ",
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: "/my-blog/profile.png",
+        width: 512,
+        height: 512,
+        alt: "ひらめのブログのプロフィール画像",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ひらめのブログ",
     description: "バックエンドエンジニアの技術メモ",
+    images: ["/my-blog/profile.png"],
   },
 };
 

@@ -31,11 +31,20 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       type: "article",
       publishedTime: postData.date,
       authors: ["hiramekun"],
+      images: [
+        {
+          url: "/my-blog/profile.png",
+          width: 512,
+          height: 512,
+          alt: "ひらめのブログのプロフィール画像",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: postData.title,
       description: postData.excerpt || "バックエンドエンジニアの技術メモ",
+      images: ["/my-blog/profile.png"],
     },
   };
 }
