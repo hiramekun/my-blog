@@ -19,7 +19,7 @@ export default function Header() {
               </h1>
             </Link>
             <p className="text-sm text-theme-tertiary mt-1">
-              バックエンドエンジニアの技術メモ
+              日々の思考や学びを記録するブログ
             </p>
           </div>
         </div>

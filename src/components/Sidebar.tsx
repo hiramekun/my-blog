@@ -35,7 +35,7 @@ export default function Sidebar() {
           </div>
         </div>
         <p className="text-sm text-theme-secondary leading-relaxed">
-          Go/Java/Scalaを中心としたバックエンド開発の経験を共有しています。
+          技術、教育、社会問題など、日々考えていることを書いています。
         </p>
       </div>
 

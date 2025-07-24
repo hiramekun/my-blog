@@ -22,10 +22,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   
   return {
     title: `${postData.title} | ひらめのブログ`,
-    description: postData.excerpt || "バックエンドエンジニアの技術メモ",
+    description: postData.excerpt || "日々の思考や学びを記録するブログ",
     openGraph: {
       title: postData.title,
-      description: postData.excerpt || "バックエンドエンジニアの技術メモ",
+      description: postData.excerpt || "日々の思考や学びを記録するブログ",
       url: `https://hiramekun.github.io/my-blog/posts/${id}/`,
       siteName: "ひらめのブログ",
       locale: "ja_JP",
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     twitter: {
       card: "summary",
       title: postData.title,
-      description: postData.excerpt || "バックエンドエンジニアの技術メモ",
+      description: postData.excerpt || "日々の思考や学びを記録するブログ",
       images: ["/my-blog/profile.png"],
     },
   };

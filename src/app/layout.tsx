@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://hiramekun.github.io"),
   title: "ひらめのブログ",
-  description: "バックエンドエンジニアの技術メモ",
+  description: "日々の思考や学びを記録するブログ",
   icons: {
     icon: [
       { url: '/my-blog/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "ひらめのブログ",
-    description: "バックエンドエンジニアの技術メモ",
+    description: "日々の思考や学びを記録するブログ",
     url: "https://hiramekun.github.io/my-blog/",
     siteName: "ひらめのブログ",
     locale: "ja_JP",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "ひらめのブログ",
-    description: "バックエンドエンジニアの技術メモ",
+    description: "日々の思考や学びを記録するブログ",
     images: ["/my-blog/profile.png"],
   },
 };
