@@ -88,19 +88,7 @@ export default async function Post({ params }: { params: Params }) {
               </header>
               
               <div 
-                className="prose prose-lg max-w-none
-                  prose-headings:text-gray-900 prose-headings:font-bold
-                  prose-h1:text-2xl prose-h1:border-b prose-h1:border-gray-200 prose-h1:pb-2
-                  prose-h2:text-xl prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2
-                  prose-h3:text-lg
-                  prose-p:text-gray-800 prose-p:leading-relaxed
-                  prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-                  prose-strong:text-gray-900
-                  prose-code:bg-gray-100 prose-code:text-red-600 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
-                  prose-pre:bg-gray-900 prose-pre:overflow-x-auto prose-pre:rounded-lg
-                  prose-blockquote:border-l-4 prose-blockquote:border-blue-200 prose-blockquote:pl-4
-                  prose-ul:text-gray-800 prose-ol:text-gray-800
-                  prose-li:text-gray-800"
+                className="prose prose-lg max-w-none"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
             </article>

@@ -30,6 +30,7 @@ body {
 .prose {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   line-height: 1.7;
+  color: #1f2937; /* 本文を濃いグレー（ほぼ黒）に */
 }
 
 /* Headings */
@@ -38,6 +39,7 @@ body {
   margin-bottom: 1rem;
   font-weight: 600;
   line-height: 1.3;
+  color: #111827; /* 見出しを更に濃い色に */
 }
 
 .prose h1 {
@@ -53,6 +55,18 @@ body {
 
 .prose h3 {
   font-size: 1.25rem;
+}
+
+/* Paragraphs */
+.prose p {
+  margin: 1rem 0;
+  color: #1f2937; /* 段落も濃い色に */
+}
+
+/* Strong/Bold text */
+.prose strong {
+  color: #111827; /* 太字を更に濃い色に */
+  font-weight: 600;
 }
 
 /* Code blocks with highlight.js */
@@ -86,10 +100,12 @@ body {
 .prose ul, .prose ol {
   margin: 1rem 0;
   padding-left: 1.5rem;
+  color: #1f2937; /* リストも濃い色に */
 }
 
 .prose li {
   margin: 0.25rem 0;
+  color: #1f2937; /* リスト項目も濃い色に */
 }
 
 /* Links */
@@ -108,5 +124,5 @@ body {
   margin: 1.5rem 0;
   padding-left: 1rem;
   font-style: italic;
-  color: #6b7280;
+  color: #374151; /* 引用文も少し濃い色に */
 }
