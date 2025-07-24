@@ -30,7 +30,7 @@ export default function Sidebar() {
             <p className="text-sm text-gray-600">バックエンドエンジニア</p>
           </div>
         </div>
-        <p className="text-sm text-gray-700 leading-relaxed">
+        <p className="text-sm text-gray-800 leading-relaxed">
           Go/Java/Scalaを中心としたバックエンド開発の経験を共有しています。
         </p>
       </div>
@@ -42,7 +42,7 @@ export default function Sidebar() {
           <ul className="space-y-2">
             {Array.from(categories).map((category) => (
               <li key={category}>
-                <span className="text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
+                <span className="text-sm text-gray-800 hover:text-blue-600 cursor-pointer">
                   {category}
                 </span>
               </li>
@@ -60,10 +60,10 @@ export default function Sidebar() {
               .sort(([a], [b]) => b.localeCompare(a))
               .map(([month, count]) => (
                 <li key={month} className="flex justify-between">
-                  <span className="text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
+                  <span className="text-sm text-gray-800 hover:text-blue-600 cursor-pointer">
                     {month}
                   </span>
-                  <span className="text-sm text-gray-500">({count})</span>
+                  <span className="text-sm text-gray-600">({count})</span>
                 </li>
               ))}
           </ul>
@@ -78,7 +78,7 @@ export default function Sidebar() {
             <li key={post.id}>
               <a 
                 href={`/my-blog/posts/${post.id}/`}
-                className="text-sm text-gray-700 hover:text-blue-600 line-clamp-2 leading-relaxed"
+                className="text-sm text-gray-800 hover:text-blue-600 line-clamp-2 leading-relaxed"
               >
                 {post.title}
               </a>

@@ -47,7 +47,7 @@ export default function Home() {
                     </div>
                     
                     {excerpt && (
-                      <p className="text-gray-700 leading-relaxed line-clamp-3">
+                      <p className="text-gray-800 leading-relaxed line-clamp-3">
                         {excerpt}
                       </p>
                     )}
