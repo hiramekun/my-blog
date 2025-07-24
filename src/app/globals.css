@@ -178,3 +178,67 @@ body {
   font-style: italic;
   color: var(--text-tertiary);
 }
+
+/* Footnotes */
+.prose .footnotes {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-primary);
+}
+
+.prose .footnotes h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.prose .footnotes ol {
+  counter-reset: footnote-counter;
+  list-style: none;
+  padding-left: 0;
+}
+
+.prose .footnotes li {
+  counter-increment: footnote-counter;
+  margin: 0.5rem 0;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.prose .footnotes li::before {
+  content: counter(footnote-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-primary);
+  font-weight: bold;
+}
+
+.prose .footnotes li p {
+  margin: 0;
+  display: inline;
+}
+
+/* Footnote reference links in text */
+.prose a[href^="#fn"] {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  vertical-align: super;
+  font-weight: bold;
+}
+
+.prose a[href^="#fn"]:hover {
+  text-decoration: underline;
+}
+
+/* Back-reference links in footnotes */
+.prose .footnotes a[href^="#fnref"] {
+  color: var(--accent-primary);
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.prose .footnotes a[href^="#fnref"]:hover {
+  text-decoration: underline;
+}
