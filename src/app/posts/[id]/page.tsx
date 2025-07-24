@@ -51,7 +51,7 @@ export default async function Post({ params }: { params: Params }) {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-theme-primary">
       <Header />
       
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -60,24 +60,24 @@ export default async function Post({ params }: { params: Params }) {
           <main className="flex-1">
             <Link 
               href="/" 
-              className="inline-block mb-6 text-blue-600 hover:text-blue-800 text-sm"
+              className="inline-block mb-6 text-theme-accent text-theme-accent-hover text-sm"
             >
               ← ホームに戻る
             </Link>
             
-            <article className="bg-white border border-gray-200 rounded-lg p-8">
+            <article className="bg-theme-secondary border border-theme-primary rounded-lg p-8">
               <header className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-900 mb-4 leading-tight">
+                <h1 className="text-2xl font-bold text-theme-primary mb-4 leading-tight">
                   {postData.title}
                 </h1>
-                <div className="flex items-center text-sm text-gray-500 space-x-4">
+                <div className="flex items-center text-sm text-theme-tertiary space-x-4">
                   <time dateTime={postData.date}>{postData.date}</time>
                   {postData.tags && postData.tags.length > 0 && (
                     <div className="flex space-x-2">
                       {postData.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs"
+                          className="bg-theme-tertiary text-theme-secondary px-2 py-1 rounded text-xs"
                         >
                           {tag}
                         </span>

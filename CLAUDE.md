@@ -44,14 +44,16 @@ The `next.config.ts` is configured for static export with:
 - **Post Pages** (`src/app/posts/[id]/page.tsx`): Dynamic routes for individual posts using `generateStaticParams()`
 - **Header Component** (`src/components/Header.tsx`): Blog title, profile avatar, and description
 - **Sidebar Component** (`src/components/Sidebar.tsx`): Profile, categories, archives, and recent posts
-- **Styling**: Tailwind CSS + custom CSS in `src/app/globals.css` for optimal Markdown rendering
+- **Styling**: Tailwind CSS + CSS variables in `src/app/globals.css` for dark theme and optimal Markdown rendering
 
-### Design System (Hatena Blog-inspired)
+### Design System (Dark Theme)
 - **2-Column Layout**: Main content + functional sidebar (responsive: mobile stacks vertically)
-- **Typography**: High-contrast text (#1f2937 on white) for excellent readability
+- **Dark Theme**: CSS variables-based color system for easy theme management
+- **Typography**: High-contrast light text on dark backgrounds for excellent readability
 - **Markdown Rendering**: Custom CSS with `marked.js` + `highlight.js` for proper code syntax highlighting
-- **Color Scheme**: Minimal white/gray palette with blue accents for links
-- **Code Blocks**: Dark background (#0d1117) with syntax highlighting for Go/Java/Scala
+- **Color Scheme**: Dark gray backgrounds (#111827, #1f2937) with blue accents (#60a5fa) for links
+- **Code Blocks**: GitHub Dark theme with syntax highlighting for Go/Java/Scala
+- **CSS Variables**: All colors managed through CSS custom properties in `:root` for easy theming
 
 ### Content Processing Flow
 1. Markdown files in `posts/` are read by `src/lib/posts.ts`
@@ -78,5 +80,6 @@ The `next.config.ts` is configured for static export with:
   - Uses `marked.js` (not `remark`) for reliable HTML generation
   - Syntax highlighting handled by `highlight.js` with manual post-processing
   - Custom CSS in `globals.css` overrides Tailwind prose classes for better control
-- **Text Contrast**: Custom CSS ensures high-contrast text (#1f2937) while preserving code block colors
+- **Theme Management**: CSS variables in `globals.css` allow easy color scheme changes
+- **Component Styling**: Uses theme-based utility classes (`.bg-theme-primary`, `.text-theme-secondary`) instead of hardcoded Tailwind colors
 - **GitHub Pages Routing**: `basePath: "/my-blog"` in `next.config.ts` is required for proper routing

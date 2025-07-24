@@ -19,30 +19,30 @@ export default function Sidebar() {
   return (
     <aside className="w-full lg:w-80 space-y-8">
       {/* プロフィール */}
-      <div className="bg-white p-6 rounded-lg border border-gray-200">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">プロフィール</h3>
+      <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
+        <h3 className="text-lg font-bold text-theme-primary mb-4">プロフィール</h3>
         <div className="flex items-center space-x-3 mb-4">
-          <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
-            <span className="text-gray-600 font-bold text-xl">H</span>
+          <div className="w-16 h-16 bg-theme-primary rounded-full flex items-center justify-center">
+            <span className="text-theme-secondary font-bold text-xl">H</span>
           </div>
           <div>
-            <h4 className="font-bold text-gray-900">hiramekun</h4>
-            <p className="text-sm text-gray-600">バックエンドエンジニア</p>
+            <h4 className="font-bold text-theme-primary">hiramekun</h4>
+            <p className="text-sm text-theme-tertiary">バックエンドエンジニア</p>
           </div>
         </div>
-        <p className="text-sm text-gray-900 leading-relaxed">
+        <p className="text-sm text-theme-secondary leading-relaxed">
           Go/Java/Scalaを中心としたバックエンド開発の経験を共有しています。
         </p>
       </div>
 
       {/* カテゴリ */}
       {categories.size > 0 && (
-        <div className="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">カテゴリ</h3>
+        <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
+          <h3 className="text-lg font-bold text-theme-primary mb-4">カテゴリ</h3>
           <ul className="space-y-2">
             {Array.from(categories).map((category) => (
               <li key={category}>
-                <span className="text-sm text-gray-900 hover:text-blue-600 cursor-pointer">
+                <span className="text-sm text-theme-secondary text-theme-accent-hover cursor-pointer">
                   {category}
                 </span>
               </li>
@@ -53,17 +53,17 @@ export default function Sidebar() {
 
       {/* アーカイブ */}
       {Object.keys(archives).length > 0 && (
-        <div className="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">アーカイブ</h3>
+        <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
+          <h3 className="text-lg font-bold text-theme-primary mb-4">アーカイブ</h3>
           <ul className="space-y-2">
             {Object.entries(archives)
               .sort(([a], [b]) => b.localeCompare(a))
               .map(([month, count]) => (
                 <li key={month} className="flex justify-between">
-                  <span className="text-sm text-gray-900 hover:text-blue-600 cursor-pointer">
+                  <span className="text-sm text-theme-secondary text-theme-accent-hover cursor-pointer">
                     {month}
                   </span>
-                  <span className="text-sm text-gray-600">({count})</span>
+                  <span className="text-sm text-theme-tertiary">({count})</span>
                 </li>
               ))}
           </ul>
@@ -71,18 +71,18 @@ export default function Sidebar() {
       )}
 
       {/* 最近の記事 */}
-      <div className="bg-white p-6 rounded-lg border border-gray-200">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">最近の記事</h3>
+      <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
+        <h3 className="text-lg font-bold text-theme-primary mb-4">最近の記事</h3>
         <ul className="space-y-3">
           {allPosts.slice(0, 5).map((post) => (
             <li key={post.id}>
               <a 
                 href={`/my-blog/posts/${post.id}/`}
-                className="text-sm text-gray-900 hover:text-blue-600 line-clamp-2 leading-relaxed"
+                className="text-sm text-theme-secondary text-theme-accent-hover line-clamp-2 leading-relaxed"
               >
                 {post.title}
               </a>
-              <p className="text-xs text-gray-500 mt-1">{post.date}</p>
+              <p className="text-xs text-theme-tertiary mt-1">{post.date}</p>
             </li>
           ))}
         </ul>
