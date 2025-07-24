@@ -4,6 +4,7 @@ import hljs from 'highlight.js';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
+import type { Metadata } from 'next';
 
 type Params = Promise<{ id: string }>;
 
@@ -12,6 +13,16 @@ export async function generateStaticParams() {
   return paths.map((path) => ({
     id: path.params.id,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { id } = await params;
+  const postData = getPostData(id);
+  
+  return {
+    title: `${postData.title} | ひらめのブログ`,
+    description: postData.excerpt || "バックエンドエンジニアの技術メモ",
+  };
 }
 
 export default async function Post({ params }: { params: Params }) {

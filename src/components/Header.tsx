@@ -15,7 +15,7 @@ export default function Header() {
           <div>
             <Link href="/" className="block">
               <h1 className="text-2xl font-bold text-theme-primary text-theme-accent-hover">
-                ひらめの技術ブログ
+                ひらめのブログ
               </h1>
             </Link>
             <p className="text-sm text-theme-tertiary mt-1">
