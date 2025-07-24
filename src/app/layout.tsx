@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hiramekun.github.io/my-blog/"),
   title: "ひらめのブログ",
   description: "バックエンドエンジニアの技術メモ",
   icons: {
