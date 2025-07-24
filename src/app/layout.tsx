@@ -22,6 +22,19 @@ export const metadata: Metadata = {
     ],
     shortcut: '/my-blog/favicon-32x32.png',
   },
+  openGraph: {
+    title: "ひらめのブログ",
+    description: "バックエンドエンジニアの技術メモ",
+    url: "https://hiramekun.github.io/my-blog/",
+    siteName: "ひらめのブログ",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ひらめのブログ",
+    description: "バックエンドエンジニアの技術メモ",
+  },
 };
 
 export default function RootLayout({
