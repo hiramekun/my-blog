@@ -40,15 +40,25 @@ The `next.config.ts` is configured for static export with:
 - MDX support through `@next/mdx`
 
 ### Page Structure
-- **Home Page** (`src/app/page.tsx`): Lists all blog posts chronologically
+- **Home Page** (`src/app/page.tsx`): Lists all blog posts chronologically with 2-column layout
 - **Post Pages** (`src/app/posts/[id]/page.tsx`): Dynamic routes for individual posts using `generateStaticParams()`
-- **Styling**: Tailwind CSS with `@tailwindcss/typography` for Markdown content
+- **Header Component** (`src/components/Header.tsx`): Blog title, profile avatar, and description
+- **Sidebar Component** (`src/components/Sidebar.tsx`): Profile, categories, archives, and recent posts
+- **Styling**: Tailwind CSS + custom CSS in `src/app/globals.css` for optimal Markdown rendering
+
+### Design System (Hatena Blog-inspired)
+- **2-Column Layout**: Main content + functional sidebar (responsive: mobile stacks vertically)
+- **Typography**: High-contrast text (#1f2937 on white) for excellent readability
+- **Markdown Rendering**: Custom CSS with `marked.js` + `highlight.js` for proper code syntax highlighting
+- **Color Scheme**: Minimal white/gray palette with blue accents for links
+- **Code Blocks**: Dark background (#0d1117) with syntax highlighting for Go/Java/Scala
 
 ### Content Processing Flow
 1. Markdown files in `posts/` are read by `src/lib/posts.ts`
 2. Frontmatter is parsed using `gray-matter`
-3. Content is converted to HTML using `remark` and `remark-html`
-4. Posts are sorted by date (newest first)
+3. Content is converted to HTML using `marked.js` with GitHub Flavored Markdown support
+4. Syntax highlighting is applied using `highlight.js` with GitHub Dark theme
+5. Posts are sorted by date (newest first)
 
 ### TypeScript Configuration
 - **Path Aliases**: `@/*` maps to `./src/*` in `tsconfig.json`
@@ -64,3 +74,9 @@ The `next.config.ts` is configured for static export with:
 ### Common Issues
 - **Build Error**: `Cannot resolve '@/lib/posts'` means utilities are not in `src/` directory
 - **Node.js Compatibility**: If build fails, try reinstalling dependencies with `rm -rf node_modules package-lock.json && npm install`
+- **Markdown Rendering Issues**: 
+  - Uses `marked.js` (not `remark`) for reliable HTML generation
+  - Syntax highlighting handled by `highlight.js` with manual post-processing
+  - Custom CSS in `globals.css` overrides Tailwind prose classes for better control
+- **Text Contrast**: Custom CSS ensures high-contrast text (#1f2937) while preserving code block colors
+- **GitHub Pages Routing**: `basePath: "/my-blog"` in `next.config.ts` is required for proper routing
