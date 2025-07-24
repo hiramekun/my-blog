@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: postData.title,
       description: postData.excerpt || "バックエンドエンジニアの技術メモ",
       images: ["/my-blog/profile.png"],

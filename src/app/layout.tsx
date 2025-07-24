@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "ひらめのブログ",
     description: "バックエンドエンジニアの技術メモ",
     images: ["/my-blog/profile.png"],
