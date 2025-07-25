@@ -1,4 +1,5 @@
 import { getSortedPostsData } from '@/lib/posts';
+import Image from 'next/image';
 
 export default function Sidebar() {
   const allPosts = getSortedPostsData();
@@ -19,9 +20,11 @@ export default function Sidebar() {
         <h3 className="text-lg font-bold text-theme-primary mb-4">プロフィール</h3>
         <div className="flex items-center space-x-3 mb-4">
           <div className="w-16 h-16 rounded-full overflow-hidden bg-theme-tertiary">
-            <img 
+            <Image 
               src="/my-blog/profile.png" 
-              alt="hiramekun profile" 
+              alt="hiramekun プロフィール画像" 
+              width={64}
+              height={64}
               className="w-full h-full object-cover"
             />
           </div>

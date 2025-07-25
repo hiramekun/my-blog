@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
   return (
@@ -6,9 +7,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 rounded-full overflow-hidden bg-theme-tertiary">
-            <img 
+            <Image 
               src="/my-blog/profile.png" 
-              alt="hiramekun profile" 
+              alt="ひらめのブログ - プロフィール画像" 
+              width={48}
+              height={48}
+              priority
               className="w-full h-full object-cover"
             />
           </div>

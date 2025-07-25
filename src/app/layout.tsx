@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { generateSiteMetadata } from '@/lib/metadata';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,40 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://hiramekun.github.io"),
-  title: "ひらめのブログ",
-  description: "日々の思考や学びを記録するブログ",
-  icons: {
-    icon: [
-      { url: '/my-blog/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/my-blog/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    shortcut: '/my-blog/favicon-32x32.png',
-  },
-  openGraph: {
-    title: "ひらめのブログ",
-    description: "日々の思考や学びを記録するブログ",
-    url: "https://hiramekun.github.io/my-blog/",
-    siteName: "ひらめのブログ",
-    locale: "ja_JP",
-    type: "website",
-    images: [
-      {
-        url: "/my-blog/profile.png",
-        width: 512,
-        height: 512,
-        alt: "ひらめのブログのプロフィール画像",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary",
-    title: "ひらめのブログ",
-    description: "日々の思考や学びを記録するブログ",
-    images: ["/my-blog/profile.png"],
-  },
-};
+export const metadata: Metadata = generateSiteMetadata();
 
 export default function RootLayout({
   children,
