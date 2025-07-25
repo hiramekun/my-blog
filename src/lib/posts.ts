@@ -73,9 +73,18 @@ export function getPostData(id: string): PostData {
 
   const matterResult = matter(fileContents);
 
+  // **「」**パターンを適切に処理するための前処理
+  let processedContent = matterResult.content;
+  // 1. **「から始まり」**で終わるパターン
+  processedContent = processedContent.replace(/\*\*「([^*]+?)」\*\*/g, '<strong>「$1」</strong>');
+  // 2. **「から始まり**で終わるパターン（」がない）
+  processedContent = processedContent.replace(/\*\*「([^*]+?)\*\*/g, '<strong>「$1</strong>');
+  // 3. **から始まり」**で終わるパターン（「がない）
+  processedContent = processedContent.replace(/\*\*([^*]+?)」\*\*/g, '<strong>$1」</strong>');
+
   return {
     id,
-    content: matterResult.content,
+    content: processedContent,
     ...matterResult.data,
   } as PostData;
 }
