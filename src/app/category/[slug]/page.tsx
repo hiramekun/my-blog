@@ -1,4 +1,5 @@
 import { getAllCategories, getPostsByCategory } from '@/lib/posts';
+import { generateCategoryMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
@@ -17,32 +18,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const category = decodeURIComponent(slug);
   
-  return {
-    title: `${category} | ひらめのブログ`,
-    description: `${category}に関する記事一覧 - 日々の思考や学びを記録するブログ`,
-    openGraph: {
-      title: `${category} | ひらめのブログ`,
-      description: `${category}に関する記事一覧 - 日々の思考や学びを記録するブログ`,
-      url: `https://hiramekun.github.io/my-blog/category/${slug}/`,
-      siteName: "ひらめのブログ",
-      locale: "ja_JP",
-      type: "website",
-      images: [
-        {
-          url: "/my-blog/profile.png",
-          width: 512,
-          height: 512,
-          alt: "ひらめのブログのプロフィール画像",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary",
-      title: `${category} | ひらめのブログ`,
-      description: `${category}に関する記事一覧 - 日々の思考や学びを記録するブログ`,
-      images: ["/my-blog/profile.png"],
-    },
-  };
+  return generateCategoryMetadata(category, slug);
 }
 
 export default async function CategoryPage({ params }: { params: Params }) {

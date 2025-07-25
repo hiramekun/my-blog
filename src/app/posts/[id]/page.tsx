@@ -1,4 +1,5 @@
 import { getAllPostIds, getPostData } from '@/lib/posts';
+import { generateArticleMetadata } from '@/lib/metadata';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
@@ -23,34 +24,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { id } = await params;
   const postData = getPostData(id);
   
-  return {
-    title: `${postData.title} | ひらめのブログ`,
-    description: postData.excerpt || "日々の思考や学びを記録するブログ",
-    openGraph: {
-      title: postData.title,
-      description: postData.excerpt || "日々の思考や学びを記録するブログ",
-      url: `https://hiramekun.github.io/my-blog/posts/${id}/`,
-      siteName: "ひらめのブログ",
-      locale: "ja_JP",
-      type: "article",
-      publishedTime: postData.date,
-      authors: ["hiramekun"],
-      images: [
-        {
-          url: "/my-blog/profile.png",
-          width: 512,
-          height: 512,
-          alt: "ひらめのブログのプロフィール画像",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary",
-      title: postData.title,
-      description: postData.excerpt || "日々の思考や学びを記録するブログ",
-      images: ["/my-blog/profile.png"],
-    },
-  };
+  return generateArticleMetadata(
+    postData.title,
+    postData.excerpt || "日々の思考や学びを記録するブログ",
+    id,
+    postData.date
+  );
 }
 
 export default async function Post({ params }: { params: Params }) {

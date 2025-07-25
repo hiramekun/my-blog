@@ -1,4 +1,5 @@
 import { getAllArchives, getPostsByArchive, getArchiveDisplayName } from '@/lib/posts';
+import { generateArchiveMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
@@ -19,34 +20,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { year, month } = await params;
-  const displayName = getArchiveDisplayName(year, month);
   
-  return {
-    title: `${displayName} | ひらめのブログ`,
-    description: `${displayName}の記事一覧 - 日々の思考や学びを記録するブログ`,
-    openGraph: {
-      title: `${displayName} | ひらめのブログ`,
-      description: `${displayName}の記事一覧 - 日々の思考や学びを記録するブログ`,
-      url: `https://hiramekun.github.io/my-blog/archive/${year}/${month}/`,
-      siteName: "ひらめのブログ",
-      locale: "ja_JP",
-      type: "website",
-      images: [
-        {
-          url: "/my-blog/profile.png",
-          width: 512,
-          height: 512,
-          alt: "ひらめのブログのプロフィール画像",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary",
-      title: `${displayName} | ひらめのブログ`,
-      description: `${displayName}の記事一覧 - 日々の思考や学びを記録するブログ`,
-      images: ["/my-blog/profile.png"],
-    },
-  };
+  return generateArchiveMetadata(year, month);
 }
 
 export default async function ArchivePage({ params }: { params: Params }) {
