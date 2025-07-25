@@ -1,11 +1,14 @@
 import { getAllPostIds, getPostData } from '@/lib/posts';
-import { marked } from 'marked';
-import markedFootnote from 'marked-footnote';
-import hljs from 'highlight.js';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeRaw from 'rehype-raw';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import type { Metadata } from 'next';
+import 'highlight.js/styles/github-dark.css';
 
 type Params = Promise<{ id: string }>;
 
@@ -53,52 +56,6 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 export default async function Post({ params }: { params: Params }) {
   const { id } = await params;
   const postData = getPostData(id);
-  
-  // Configure marked with GitHub Flavored Markdown and footnotes
-  marked.use({
-    gfm: true,
-    breaks: true,
-    pedantic: false
-  });
-  
-  marked.use(markedFootnote());
-  
-  // Parse markdown and then apply syntax highlighting
-  let contentHtml = marked.parse(postData.content) as string;
-  
-  // Additional post-processing for better bold text recognition
-  // Handle cases where ** is not separated by spaces
-  contentHtml = contentHtml.replace(
-    /([^\s])\*\*([^*]+?)\*\*([^\s])/g,
-    '$1<strong>$2</strong>$3'
-  );
-  contentHtml = contentHtml.replace(
-    /\*\*([^*]+?)\*\*/g,
-    '<strong>$1</strong>'
-  );
-  
-  // Apply syntax highlighting to code blocks
-  contentHtml = contentHtml.replace(
-    /<pre><code class="language-(\w+)">([\s\S]*?)<\/code><\/pre>/g,
-    (match, lang, code) => {
-      try {
-        const highlightedCode = hljs.highlight(code, { language: lang }).value;
-        return `<pre><code class="language-${lang}">${highlightedCode}</code></pre>`;
-      } catch {
-        return match;
-      }
-    }
-  ).replace(
-    /<pre><code>([\s\S]*?)<\/code><\/pre>/g,
-    (match, code) => {
-      try {
-        const highlightedCode = hljs.highlightAuto(code).value;
-        return `<pre><code>${highlightedCode}</code></pre>`;
-      } catch {
-        return match;
-      }
-    }
-  );
 
   return (
     <div className="min-h-screen bg-theme-primary">
@@ -137,10 +94,44 @@ export default async function Post({ params }: { params: Params }) {
                 </div>
               </header>
               
-              <div 
-                className="prose prose-xl max-w-none"
-                dangerouslySetInnerHTML={{ __html: contentHtml }}
-              />
+              <div className="prose prose-xl max-w-none">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm, remarkBreaks]}
+                  rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                  skipHtml={false}
+                  components={{
+                    // カスタムコンポーネントでスタイリングを調整
+                    h1: ({children}) => <h1 className="text-2xl font-bold mb-4">{children}</h1>,
+                    h2: ({children}) => <h2 className="text-xl font-bold mb-3">{children}</h2>,
+                    h3: ({children}) => <h3 className="text-lg font-bold mb-2">{children}</h3>,
+                    p: ({children}) => <p className="mb-4 leading-relaxed">{children}</p>,
+                    strong: ({children}) => <strong className="font-bold text-theme-primary">{children}</strong>,
+                    b: ({children}) => <b className="font-bold text-theme-primary">{children}</b>,
+                    blockquote: ({children}) => (
+                      <blockquote className="border-l-4 border-theme-accent pl-4 italic my-4">
+                        {children}
+                      </blockquote>
+                    ),
+                    code: ({children, className}) => {
+                      const isInline = !className;
+                      return isInline ? (
+                        <code className="bg-theme-tertiary px-1 py-0.5 rounded text-sm">
+                          {children}
+                        </code>
+                      ) : (
+                        <code className={className}>{children}</code>
+                      );
+                    },
+                    pre: ({children}) => (
+                      <pre className="bg-theme-primary border border-theme-primary rounded p-4 overflow-x-auto my-4">
+                        {children}
+                      </pre>
+                    )
+                  }}
+                >
+                  {postData.content}
+                </ReactMarkdown>
+              </div>
             </article>
           </main>
 
