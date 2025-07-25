@@ -46,3 +46,59 @@ jobs:
       if: github.ref == 'refs/heads/main'
       id: deployment
       uses: actions/deploy-pages@v4
+
+    - name: Wait for deployment
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "⏳ Waiting 30 seconds for deployment to be fully available..."
+        sleep 30
+
+    - name: Run E2E Tests
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "🧪 Starting E2E Tests..."
+        
+        # Test 1: Check if the site returns 200 status
+        echo "📋 Test 1: Checking top page accessibility"
+        echo "Testing: https://hiramekun.github.io/my-blog/"
+        HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://hiramekun.github.io/my-blog/)
+        
+        if [ "$HTTP_STATUS" -eq 200 ]; then
+          echo "✅ Top page is accessible (HTTP $HTTP_STATUS)"
+        else
+          echo "❌ Top page returned HTTP $HTTP_STATUS"
+          exit 1
+        fi
+        
+        # Test 2: Check if content contains expected title
+        echo "📋 Test 2: Checking page title"
+        echo "Testing content includes 'ひらめのブログ'..."
+        CONTENT=$(curl -s https://hiramekun.github.io/my-blog/)
+        if echo "$CONTENT" | grep -q "ひらめのブログ"; then
+          echo "✅ Page contains expected title 'ひらめのブログ'"
+        else
+          echo "❌ Page does not contain expected title 'ひらめのブログ'"
+          exit 1
+        fi
+        
+        # Test 3: Check if a sample post is accessible
+        echo "📋 Test 3: Checking sample post accessibility"
+        echo "Testing: https://hiramekun.github.io/my-blog/posts/llm-thoughts/"
+        POST_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://hiramekun.github.io/my-blog/posts/llm-thoughts/)
+        
+        if [ "$POST_STATUS" -eq 200 ]; then
+          echo "✅ Sample post is accessible (HTTP $POST_STATUS)"
+        else
+          echo "❌ Sample post returned HTTP $POST_STATUS"
+          exit 1
+        fi
+        
+        echo "🎉 All E2E tests passed successfully!"
+
+    - name: E2E Test Failure Alert
+      if: failure() && github.ref == 'refs/heads/main'
+      run: |
+        echo "❌ E2E tests failed for deployment!"
+        echo "🔗 Site URL: https://hiramekun.github.io/my-blog/"
+        echo "🔍 Please check the deployment manually."
+        echo "📊 Deployment ID: ${{ steps.deployment.outputs.page_url }}"
