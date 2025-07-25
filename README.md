@@ -1,66 +1,66 @@
-# ひらめのブログ
+# Hirame's Blog
 
-日々の思考や学びを記録するブログです。技術、教育、社会問題など幅広いテーマを扱っています。
+A blog recording daily thoughts and learnings, covering a wide range of topics including technology, education, and social issues.
 
 🌐 **Live Site**: https://hiramekun.github.io/my-blog/
 
-## 技術構成
+## Tech Stack
 
-- **Next.js 15** - 静的サイト生成（App Router + TypeScript）
-- **Tailwind CSS** - GitHubダークテーマベースのデザイン
-- **Markdown/MDX** - 記事執筆（脚注記法対応）
-- **GitHub Pages** - 自動デプロイ
+- **Next.js 15** - Static site generation (App Router + TypeScript)
+- **Tailwind CSS** - GitHub dark theme based design
+- **Markdown/MDX** - Article writing (footnote syntax support)
+- **GitHub Pages** - Automated deployment
 
-## 機能
+## Features
 
-- **投稿管理**: Markdownファイルベースの記事作成
-- **アーカイブ**: 月別記事一覧（`/archive/2025/06/`）
-- **OGPサポート**: Twitter/SNS共有対応
-- **レスポンシブ**: モバイル・デスクトップ対応
-- **シンタックスハイライト**: コードブロック表示
-- **脚注**: `[^1]` 記法サポート
+- **Post Management**: Markdown file-based article creation
+- **Archive**: Monthly post listings (`/archive/2025/06/`)
+- **OGP Support**: Twitter/SNS sharing support
+- **Responsive**: Mobile and desktop compatibility
+- **Syntax Highlighting**: Code block display
+- **Footnotes**: `[^1]` syntax support
 
-## 開発
+## Development
 
 ```bash
-# セットアップ
+# Setup
 npm install
 npm run dev  # localhost:3000
 
-# デプロイ
-git push origin main  # 自動デプロイ
+# Deploy
+git push origin main  # Automated deployment
 ```
 
-## 記事作成
+## Creating Articles
 
-`posts/article-name.md` を作成：
+Create `posts/article-name.md`:
 
 ```markdown
 ---
-title: "記事タイトル"
+title: "Article Title"
 date: "2025-07-24"
-excerpt: "記事の概要"
-tags: ["タグ1", "タグ2"]
+excerpt: "Article summary"
+tags: ["tag1", "tag2"]
 ---
 
-記事内容をMarkdownで記述...
+Write article content in Markdown...
 ```
 
-## プロジェクト構造
+## Project Structure
 
 ```
-├── posts/                 # 記事（Markdown）
+├── posts/                 # Articles (Markdown)
 ├── src/
 │   ├── app/
-│   │   ├── posts/[id]/    # 記事ページ
-│   │   └── archive/       # アーカイブページ
-│   ├── components/        # React コンポーネント  
-│   └── lib/posts.ts      # 記事処理ロジック
-└── .github/workflows/    # 自動デプロイ設定
+│   │   ├── posts/[id]/    # Article pages
+│   │   └── archive/       # Archive pages
+│   ├── components/        # React components
+│   └── lib/posts.ts      # Article processing logic
+└── .github/workflows/    # Automated deployment config
 ```
 
-## カスタマイズ
+## Customization
 
-- **テーマ色**: `src/app/globals.css` の CSS変数
-- **サイト情報**: `src/components/Header.tsx`, `Sidebar.tsx`
-- **メタデータ**: `src/app/layout.tsx`
+- **Theme Colors**: CSS variables in `src/app/globals.css`
+- **Site Info**: `src/components/Header.tsx`, `Sidebar.tsx`
+- **Metadata**: `src/app/layout.tsx`
