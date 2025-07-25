@@ -1,4 +1,4 @@
-# Hirame's Blog
+# hiramekun's Blog
 
 A blog recording daily thoughts and learnings, covering a wide range of topics including technology, education, and social issues.
 
