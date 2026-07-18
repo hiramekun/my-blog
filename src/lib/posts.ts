@@ -27,10 +27,16 @@ export function getSortedPostsData(): PostData[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const matterResult = matter(fileContents);
 
+      // Dateオブジェクトを文字列に変換
+      const data = matterResult.data;
+      if (data.date instanceof Date) {
+        data.date = data.date.toISOString().split('T')[0];
+      }
+
       return {
         id,
         content: matterResult.content,
-        ...matterResult.data,
+        ...data,
       } as PostData;
     });
 
@@ -63,7 +69,7 @@ export function getAllPostIds() {
 export function getPostData(id: string): PostData {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   let fileContents: string;
-  
+
   try {
     fileContents = fs.readFileSync(fullPath, 'utf8');
   } catch {
@@ -72,6 +78,12 @@ export function getPostData(id: string): PostData {
   }
 
   const matterResult = matter(fileContents);
+
+  // Dateオブジェクトを文字列に変換
+  const data = matterResult.data;
+  if (data.date instanceof Date) {
+    data.date = data.date.toISOString().split('T')[0];
+  }
 
   // **「」**パターンを適切に処理するための前処理
   let processedContent = matterResult.content;
@@ -85,7 +97,7 @@ export function getPostData(id: string): PostData {
   return {
     id,
     content: processedContent,
-    ...matterResult.data,
+    ...data,
   } as PostData;
 }
 
