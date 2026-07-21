@@ -9,6 +9,12 @@ This file provides Claude Code project configuration and guidance.
 - `npm run build` - Generate static site (outputs to `out/`)
 - `npm run lint` - Run ESLint checks
 
+> **Note**: `basePath: "/my-blog"` のため、devサーバーでもサイトは `/my-blog` 配下で配信される。
+> `http://localhost:3000/` は404になるので、必ず `http://localhost:3000/my-blog` を開くこと。
+
+### UI変更後の表示確認
+UIやリファクタリングの変更後は、`verify-site` skill でローカルの表示崩れを目視確認する。
+
 ### Deployment
 Auto-deploy via GitHub Actions (`.github/workflows/deploy.yml`). Triggers on push to `main` branch.
 
