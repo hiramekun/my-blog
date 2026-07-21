@@ -59,7 +59,7 @@ export function generateSiteMetadata(options: MetadataOptions = {}): Metadata {
       shortcut: `${SITE_CONFIG.basePath}/favicon-32x32.png`,
     },
     openGraph: {
-      title: title === SITE_CONFIG.name ? title : title,
+      title,
       description,
       url,
       siteName: SITE_CONFIG.name,
@@ -71,7 +71,7 @@ export function generateSiteMetadata(options: MetadataOptions = {}): Metadata {
     },
     twitter: {
       card: 'summary',
-      title: title === SITE_CONFIG.name ? title : title,
+      title,
       description,
       images: images.map(img => img.url),
     },
