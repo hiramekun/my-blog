@@ -1,15 +1,14 @@
 import { getSortedPostsData } from '@/lib/posts';
+import { toYearMonthKey, formatYearMonth } from '@/lib/date';
 import Image from 'next/image';
 
 export default function Sidebar() {
   const allPosts = getSortedPostsData();
-  
-  
-  // 月別アーカイブを作成
+
+  // 月別アーカイブを "YYYY-MM" キーで集計する
   const archives = allPosts.reduce((acc, post) => {
-    const date = new Date(post.date);
-    const monthKey = `${date.getFullYear()}年${date.getMonth() + 1}月`;
-    acc[monthKey] = (acc[monthKey] || 0) + 1;
+    const key = toYearMonthKey(post.date);
+    acc[key] = (acc[key] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
@@ -46,20 +45,17 @@ export default function Sidebar() {
           <ul className="space-y-2">
             {Object.entries(archives)
               .sort(([a], [b]) => b.localeCompare(a))
-              .map(([month, count]) => {
-                // "2025年6月" から "2025" と "06" を抽出
-                const match = month.match(/(\d{4})年(\d+)月/);
-                if (!match) return null;
-                const [, year, monthNum] = match;
-                const paddedMonth = monthNum.padStart(2, '0');
-                
+              .map(([key, count]) => {
+                // "YYYY-MM" キーから年・月を取り出す
+                const [year, month] = key.split('-');
+
                 return (
-                  <li key={month} className="flex justify-between">
-                    <a 
-                      href={`/my-blog/archive/${year}/${paddedMonth}/`}
+                  <li key={key} className="flex justify-between">
+                    <a
+                      href={`/my-blog/archive/${year}/${month}/`}
                       className="text-sm text-theme-secondary text-theme-accent-hover hover:underline"
                     >
-                      {month}
+                      {formatYearMonth(year, month)}
                     </a>
                     <span className="text-sm text-theme-tertiary">({count})</span>
                   </li>
