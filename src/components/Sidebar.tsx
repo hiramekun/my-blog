@@ -13,26 +13,26 @@ export default function Sidebar() {
   }, {} as Record<string, number>);
 
   return (
-    <aside className="w-full lg:w-80 space-y-8">
+    <aside className="w-full lg:w-80 space-y-6">
       {/* プロフィール */}
-      <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
-        <h3 className="text-lg font-bold text-theme-primary mb-4">プロフィール</h3>
+      <div className="md-card p-6">
+        <h3 className="md-title-medium md-on-surface mb-4">プロフィール</h3>
         <div className="flex items-center space-x-3 mb-4">
-          <div className="w-16 h-16 rounded-full overflow-hidden bg-theme-tertiary">
-            <Image 
-              src="/my-blog/profile.png" 
-              alt="hiramekun プロフィール画像" 
+          <div className="w-16 h-16 rounded-full overflow-hidden md-surface-container-high">
+            <Image
+              src="/my-blog/profile.png"
+              alt="hiramekun プロフィール画像"
               width={64}
               height={64}
               className="w-full h-full object-cover"
             />
           </div>
           <div>
-            <h4 className="font-bold text-theme-primary">hiramekun</h4>
-            <p className="text-sm text-theme-tertiary">バックエンドエンジニア</p>
+            <h4 className="md-title-small md-on-surface">hiramekun</h4>
+            <p className="md-body-small md-on-surface-variant">バックエンドエンジニア</p>
           </div>
         </div>
-        <p className="text-sm text-theme-secondary leading-relaxed">
+        <p className="md-body-medium md-on-surface-variant leading-relaxed">
           技術、教育、社会問題など、日々考えていることを書いています。
         </p>
       </div>
@@ -40,9 +40,9 @@ export default function Sidebar() {
 
       {/* アーカイブ */}
       {Object.keys(archives).length > 0 && (
-        <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
-          <h3 className="text-lg font-bold text-theme-primary mb-4">アーカイブ</h3>
-          <ul className="space-y-2">
+        <div className="md-card p-6">
+          <h3 className="md-title-medium md-on-surface mb-3">アーカイブ</h3>
+          <ul className="space-y-1">
             {Object.entries(archives)
               .sort(([a], [b]) => b.localeCompare(a))
               .map(([key, count]) => {
@@ -50,14 +50,14 @@ export default function Sidebar() {
                 const [year, month] = key.split('-');
 
                 return (
-                  <li key={key} className="flex justify-between">
+                  <li key={key}>
                     <a
                       href={`/my-blog/archive/${year}/${month}/`}
-                      className="text-sm text-theme-secondary text-theme-accent-hover hover:underline"
+                      className="md-list-link md-body-medium flex justify-between"
                     >
-                      {formatYearMonth(year, month)}
+                      <span>{formatYearMonth(year, month)}</span>
+                      <span className="md-on-surface-variant">({count})</span>
                     </a>
-                    <span className="text-sm text-theme-tertiary">({count})</span>
                   </li>
                 );
               })}
@@ -66,18 +66,20 @@ export default function Sidebar() {
       )}
 
       {/* 最近の記事 */}
-      <div className="bg-theme-secondary p-6 rounded-lg border border-theme-primary">
-        <h3 className="text-lg font-bold text-theme-primary mb-4">最近の記事</h3>
-        <ul className="space-y-3">
+      <div className="md-card p-6">
+        <h3 className="md-title-medium md-on-surface mb-3">最近の記事</h3>
+        <ul className="space-y-1">
           {allPosts.slice(0, 5).map((post) => (
             <li key={post.id}>
-              <a 
+              <a
                 href={`/my-blog/posts/${post.id}/`}
-                className="text-sm text-theme-secondary text-theme-accent-hover line-clamp-2 leading-relaxed"
+                className="md-list-link"
               >
-                {post.title}
+                <span className="md-body-medium line-clamp-2 leading-relaxed">
+                  {post.title}
+                </span>
+                <span className="md-label-medium md-on-surface-variant block mt-1">{post.date}</span>
               </a>
-              <p className="text-xs text-theme-tertiary mt-1">{post.date}</p>
             </li>
           ))}
         </ul>

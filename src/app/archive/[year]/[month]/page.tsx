@@ -31,10 +31,10 @@ export default async function ArchivePage({ params }: { params: Params }) {
   return (
     <PageLayout showBackLink>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-theme-primary mb-2">
+        <h1 className="md-headline-large md-on-surface mb-2">
           アーカイブ: {displayName}
         </h1>
-        <p className="text-theme-tertiary">
+        <p className="md-body-medium md-on-surface-variant">
           {posts.length}件の記事があります
         </p>
       </div>

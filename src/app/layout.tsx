@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { generateSiteMetadata } from '@/lib/metadata';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Material Design 3 の標準タイプフェイスである Roboto を使用する
+const roboto = Roboto({
+  variable: "--font-roboto",
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
@@ -23,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${roboto.variable} ${robotoMono.variable} antialiased`}
       >
         {children}
       </body>

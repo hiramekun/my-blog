@@ -36,20 +36,17 @@ export default async function Post({ params }: { params: Params }) {
 
   return (
     <PageLayout showBackLink>
-      <article className="bg-theme-secondary border border-theme-primary rounded-lg p-8">
+      <article className="md-card p-8">
         <header className="mb-8">
-          <h1 className="text-2xl font-bold text-theme-primary mb-4 leading-tight">
+          <h1 className="md-headline-large md-on-surface mb-4 leading-tight">
             {postData.title}
           </h1>
-          <div className="flex items-center text-sm text-theme-tertiary space-x-4">
-            <time dateTime={postData.date}>{postData.date}</time>
+          <div className="flex items-center flex-wrap gap-x-4 gap-y-2">
+            <time dateTime={postData.date} className="md-label-medium md-on-surface-variant">{postData.date}</time>
             {postData.tags && postData.tags.length > 0 && (
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-2">
                 {postData.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="bg-theme-tertiary text-theme-secondary px-2 py-1 rounded text-xs"
-                  >
+                  <span key={tag} className="md-chip">
                     {tag}
                   </span>
                 ))}
