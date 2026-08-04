@@ -21,7 +21,7 @@ export default function PageLayout({ children, showBackLink = false }: PageLayou
             {showBackLink && (
               <Link
                 href="/"
-                className="inline-block mb-6 text-theme-accent text-theme-accent-hover text-sm"
+                className="md-text-button -ml-3 mb-4"
               >
                 ← ホームに戻る
               </Link>

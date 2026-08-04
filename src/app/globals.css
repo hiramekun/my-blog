@@ -1,45 +1,237 @@
 @import "tailwindcss";
 @import "highlight.js/styles/github-dark.css";
 
+/*
+ * Material Design 3 (https://m3.material.io/develop/web) をベースにした
+ * デザインシステム。color / typography / shape / elevation / state layer の
+ * 各トークンを CSS 変数として定義する。ダークスキームを採用。
+ */
 :root {
-  /* GitHub dark theme color variables */
-  --bg-primary: #0d1117;      /* GitHub main background */
-  --bg-secondary: #161b22;    /* GitHub secondary background/cards */
-  --bg-tertiary: #21262d;     /* GitHub tertiary background (slightly lighter) */
-  --border-primary: #30363d;  /* GitHub border color */
-  --border-secondary: #21262d; /* GitHub secondary border */
-  
-  --text-primary: #f0f6fc;    /* GitHub primary text (white-ish) */
-  --text-secondary: #c9c9c9;  /* GitHub secondary text */
-  --text-tertiary: #8b949e;   /* GitHub muted text */
-  
-  --accent-primary: #58a6ff;  /* GitHub link blue */
-  --accent-hover: #79c0ff;    /* GitHub link hover blue */
-  --accent-secondary: #ffd33d; /* GitHub yellow accent */
-  
-  --code-bg: #0d1117;         /* GitHub code background */
-  --code-text: #e6edf3;       /* GitHub code text */
-  --inline-code-bg: #21262d;  /* GitHub inline code background */
-  
-  /* Legacy variables for compatibility */
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
+  color-scheme: dark;
+
+  /* ===== Color tokens — dark scheme ===== */
+  --md-sys-color-primary: #a6c8ff;
+  --md-sys-color-on-primary: #00305f;
+  --md-sys-color-primary-container: #1e4676;
+  --md-sys-color-on-primary-container: #d4e3ff;
+
+  --md-sys-color-secondary: #bdc7dc;
+  --md-sys-color-on-secondary: #273141;
+  --md-sys-color-secondary-container: #3d4758;
+  --md-sys-color-on-secondary-container: #d9e3f8;
+
+  --md-sys-color-tertiary: #dcbce1;
+  --md-sys-color-on-tertiary: #3f2845;
+  --md-sys-color-tertiary-container: #573f5d;
+  --md-sys-color-on-tertiary-container: #f8d8fe;
+
+  --md-sys-color-surface: #111418;
+  --md-sys-color-surface-dim: #111418;
+  --md-sys-color-surface-bright: #37393e;
+  --md-sys-color-surface-container-lowest: #0c0e12;
+  --md-sys-color-surface-container-low: #191c20;
+  --md-sys-color-surface-container: #1d2024;
+  --md-sys-color-surface-container-high: #282a2f;
+  --md-sys-color-surface-container-highest: #32353a;
+  --md-sys-color-on-surface: #e2e2e6;
+  --md-sys-color-on-surface-variant: #c4c6d0;
+
+  --md-sys-color-outline: #8e9099;
+  --md-sys-color-outline-variant: #44474e;
+
+  --md-sys-color-inverse-surface: #e2e2e6;
+  --md-sys-color-inverse-on-surface: #2e3035;
+  --md-sys-color-inverse-primary: #345ca8;
+
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+
+  /* ===== Shape scale ===== */
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
+
+  /* ===== Elevation (shadow) ===== */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+  /* ===== State layer opacities ===== */
+  --md-sys-state-hover: 0.08;
+  --md-sys-state-focus: 0.12;
+  --md-sys-state-pressed: 0.12;
+
+  /*
+   * ===== Legacy aliases =====
+   * 既存コンポーネントで使われている GitHub テーマ由来の変数を
+   * M3 トークンへマッピングし、後方互換を保つ。
+   */
+  --bg-primary: var(--md-sys-color-surface);
+  --bg-secondary: var(--md-sys-color-surface-container-low);
+  --bg-tertiary: var(--md-sys-color-surface-container-high);
+  --border-primary: var(--md-sys-color-outline-variant);
+  --border-secondary: var(--md-sys-color-outline-variant);
+
+  --text-primary: var(--md-sys-color-on-surface);
+  --text-secondary: var(--md-sys-color-on-surface-variant);
+  --text-tertiary: var(--md-sys-color-outline);
+
+  --accent-primary: var(--md-sys-color-primary);
+  --accent-hover: var(--md-sys-color-primary);
+  --accent-secondary: #ffd33d;
+
+  --code-bg: var(--md-sys-color-surface-container-lowest);
+  --code-text: #e6edf3;
+  --inline-code-bg: var(--md-sys-color-surface-container-high);
+
+  --background: var(--md-sys-color-surface);
+  --foreground: var(--md-sys-color-on-surface);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-roboto);
+  --font-mono: var(--font-roboto-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-roboto), Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Theme-based utility classes */
+/* =========================================================================
+ * Typography scale (M3)
+ * ========================================================================= */
+.md-display-small { font-size: 2.25rem; line-height: 2.75rem; font-weight: 400; letter-spacing: 0; }
+.md-headline-large { font-size: 2rem; line-height: 2.5rem; font-weight: 400; letter-spacing: 0; }
+.md-headline-medium { font-size: 1.75rem; line-height: 2.25rem; font-weight: 400; letter-spacing: 0; }
+.md-headline-small { font-size: 1.5rem; line-height: 2rem; font-weight: 400; letter-spacing: 0; }
+.md-title-large { font-size: 1.375rem; line-height: 1.75rem; font-weight: 400; letter-spacing: 0; }
+.md-title-medium { font-size: 1rem; line-height: 1.5rem; font-weight: 500; letter-spacing: 0.009375em; }
+.md-title-small { font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; letter-spacing: 0.00714em; }
+.md-body-large { font-size: 1rem; line-height: 1.5rem; font-weight: 400; letter-spacing: 0.03125em; }
+.md-body-medium { font-size: 0.875rem; line-height: 1.25rem; font-weight: 400; letter-spacing: 0.01786em; }
+.md-body-small { font-size: 0.75rem; line-height: 1rem; font-weight: 400; letter-spacing: 0.03333em; }
+.md-label-large { font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; letter-spacing: 0.00714em; }
+.md-label-medium { font-size: 0.75rem; line-height: 1rem; font-weight: 500; letter-spacing: 0.04167em; }
+
+/* =========================================================================
+ * Surface / color utility classes
+ * ========================================================================= */
+.md-surface { background-color: var(--md-sys-color-surface); }
+.md-surface-container-low { background-color: var(--md-sys-color-surface-container-low); }
+.md-surface-container { background-color: var(--md-sys-color-surface-container); }
+.md-surface-container-high { background-color: var(--md-sys-color-surface-container-high); }
+
+.md-on-surface { color: var(--md-sys-color-on-surface); }
+.md-on-surface-variant { color: var(--md-sys-color-on-surface-variant); }
+.md-primary-text { color: var(--md-sys-color-primary); }
+
+/* =========================================================================
+ * Components (M3)
+ * ========================================================================= */
+
+/* --- Card: filled --- */
+.md-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* --- Card: outlined --- */
+.md-card-outlined {
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-large);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* --- Interactive card with state layer + elevation on hover --- */
+.md-card-interactive {
+  position: relative;
+  isolation: isolate;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.md-card-interactive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background-color: var(--md-sys-color-on-surface);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.md-card-interactive:hover {
+  box-shadow: var(--md-sys-elevation-2);
+}
+.md-card-interactive:hover::after {
+  opacity: var(--md-sys-state-hover);
+}
+
+/* --- Chip (assist / input) --- */
+.md-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 28px;
+  padding: 0 0.75rem;
+  border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background-color: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+a.md-chip:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+  border-color: var(--md-sys-color-outline);
+}
+
+/* --- Text button --- */
+.md-text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 40px;
+  padding: 0 0.75rem;
+  border-radius: var(--md-sys-shape-corner-full);
+  color: var(--md-sys-color-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  transition: background-color 0.2s ease;
+}
+.md-text-button:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent);
+}
+
+/* --- List item with state layer (nav / sidebar links) --- */
+.md-list-link {
+  position: relative;
+  display: block;
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: 0.5rem 0.75rem;
+  color: var(--md-sys-color-on-surface-variant);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.md-list-link:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* =========================================================================
+ * Legacy utility classes — remapped onto M3 tokens
+ * ========================================================================= */
 .bg-theme-primary { background-color: var(--bg-primary); }
 .bg-theme-secondary { background-color: var(--bg-secondary); }
 .bg-theme-tertiary { background-color: var(--bg-tertiary); }
@@ -54,62 +246,69 @@ body {
 .text-theme-accent { color: var(--accent-primary); }
 .text-theme-accent-hover:hover { color: var(--accent-hover); }
 
-.hover-bg-theme-hover:hover { background-color: rgba(55, 65, 81, 0.5); } /* gray-700 with opacity */
-
-/* Markdown content styles */
-.prose {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  line-height: 1.7;
+.hover-bg-theme-hover:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
 }
 
-/* Apply theme colors for text elements, not code blocks */
+/* =========================================================================
+ * Markdown content (prose) — M3 typography + colors
+ * ========================================================================= */
+.prose {
+  font-family: var(--font-roboto), Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
 .prose > *:not(pre),
 .prose p,
 .prose li {
-  color: var(--text-secondary);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 /* Headings */
 .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.3;
-  color: var(--text-primary);
+  color: var(--md-sys-color-on-surface);
 }
 
 .prose h1 {
   font-size: 2rem;
+  line-height: 2.5rem;
   margin-top: 0;
 }
 
 .prose h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid var(--border-primary);
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
   padding-bottom: 0.5rem;
 }
 
 .prose h3 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 /* Paragraphs */
 .prose p {
   margin: 1rem 0;
-  color: var(--text-secondary);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 /* Strong/Bold text */
 .prose strong {
-  color: var(--text-primary);
-  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
 }
 
 /* Code blocks with highlight.js */
 .prose pre {
   margin: 1.5rem 0;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--md-sys-shape-corner-medium);
   overflow-x: auto;
   background-color: var(--code-bg) !important;
 }
@@ -122,12 +321,10 @@ body {
   color: var(--code-text) !important;
 }
 
-/* Override prose color for code blocks - ensure highlight.js colors work */
 .prose pre * {
   color: inherit !important;
 }
 
-/* Specific highlight.js color overrides */
 .prose pre .hljs-keyword { color: #ff7b72 !important; }
 .prose pre .hljs-string { color: #a5d6ff !important; }
 .prose pre .hljs-comment { color: #8b949e !important; }
@@ -139,47 +336,37 @@ body {
 
 /* Inline code */
 .prose :not(pre) > code {
-  background-color: var(--inline-code-bg);
+  background-color: var(--md-sys-color-surface-container-high);
   color: var(--accent-secondary);
   padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
+  border-radius: var(--md-sys-shape-corner-small);
   font-size: 0.875rem;
   font-weight: 500;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-family: var(--font-roboto-mono), "SF Mono", Monaco, "Roboto Mono", Consolas, monospace;
 }
 
 /* Lists */
 .prose ul, .prose ol {
   margin: 1rem 0;
   padding-left: 1.5rem;
-  color: var(--text-secondary);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
-.prose ul {
-  list-style-type: disc;
-}
-
-.prose ol {
-  list-style-type: decimal;
-}
+.prose ul { list-style-type: disc; }
+.prose ol { list-style-type: decimal; }
 
 .prose li {
   margin: 0.25rem 0;
-  color: var(--text-secondary);
+  color: var(--md-sys-color-on-surface-variant);
   display: list-item;
 }
 
-.prose ul li {
-  list-style-type: disc;
-}
-
-.prose ol li {
-  list-style-type: decimal;
-}
+.prose ul li { list-style-type: disc; }
+.prose ol li { list-style-type: decimal; }
 
 /* Links */
 .prose a {
-  color: var(--accent-primary);
+  color: var(--md-sys-color-primary);
   text-decoration: none;
 }
 
@@ -189,24 +376,24 @@ body {
 
 /* Blockquotes */
 .prose blockquote {
-  border-left: 4px solid var(--accent-primary);
+  border-left: 4px solid var(--md-sys-color-primary);
   margin: 1.5rem 0;
   padding-left: 1rem;
   font-style: italic;
-  color: var(--text-tertiary);
+  color: var(--md-sys-color-outline);
 }
 
 /* Footnotes */
 .prose .footnotes {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-primary);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .prose .footnotes h2 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: var(--md-sys-color-on-surface);
 }
 
 .prose .footnotes ol {
@@ -216,7 +403,7 @@ body {
 
 .prose .footnotes li {
   margin: 0.5rem 0;
-  color: var(--text-secondary);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 .prose .footnotes li p {
@@ -224,9 +411,8 @@ body {
   display: inline;
 }
 
-/* Footnote reference links in text */
 .prose a[href^="#fn"] {
-  color: var(--accent-primary);
+  color: var(--md-sys-color-primary);
   text-decoration: none;
   font-size: 0.875rem;
   vertical-align: super;
@@ -237,9 +423,8 @@ body {
   text-decoration: underline;
 }
 
-/* Back-reference links in footnotes */
 .prose .footnotes a[href^="#fnref"] {
-  color: var(--accent-primary);
+  color: var(--md-sys-color-primary);
   text-decoration: none;
   margin-left: 0.25rem;
 }
