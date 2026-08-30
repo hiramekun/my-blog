@@ -1,0 +1,241 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">hiramekun.dev システム構成図</title>
+  <desc id="desc">Obsidian で管理する Markdown と Next.js の2つの静的サイトを GitHub で管理し、Cloudflare Pages の Git 連携で hiramekun.dev と blog.hiramekun.dev へ配信する構成。GitHub Actions は品質確認と公開後の死活監視を行い、Terraform は Pages、DNS、カスタムドメインを管理し、state を R2 に保存する。</desc>
+
+  <defs>
+    <!-- Official Obsidian mark: https://obsidian.md/images/obsidian-logo-gradient.svg -->
+    <symbol id="icon-obsidian" viewBox="0 0 512 512">
+      <radialGradient id="obsidian-bottom-left" cx="0" cy="0" gradientTransform="matrix(-59 -225 150 -39 161.4 470)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-opacity=".1"/>
+      </radialGradient>
+      <radialGradient id="obsidian-top-right" cx="0" cy="0" gradientTransform="matrix(50 -379 280 37 360 374.2)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/>
+      </radialGradient>
+      <radialGradient id="obsidian-top-left" cx="0" cy="0" gradientTransform="matrix(69 -319 218 47 175.4 307)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity=".4"/>
+      </radialGradient>
+      <radialGradient id="obsidian-bottom-right" cx="0" cy="0" gradientTransform="matrix(-96 -163 187 -111 335.3 512.2)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-opacity=".3"/>
+      </radialGradient>
+      <radialGradient id="obsidian-top-edge" cx="0" cy="0" gradientTransform="matrix(-36 166 -112 -24 310 128.2)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".2"/>
+      </radialGradient>
+      <radialGradient id="obsidian-left-edge" cx="0" cy="0" gradientTransform="matrix(88 89 -190 187 111 220.2)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity=".4"/>
+      </radialGradient>
+      <radialGradient id="obsidian-bottom-edge" cx="0" cy="0" gradientTransform="matrix(9 130 -276 20 215 284)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity=".3"/>
+      </radialGradient>
+      <radialGradient id="obsidian-middle-edge" cx="0" cy="0" gradientTransform="matrix(-198 -104 327 -623 400 399.2)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset=".5" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity=".3"/>
+      </radialGradient>
+      <path d="M382.3 475.6c-3.1 23.4-26 41.6-48.7 35.3-32.4-8.9-69.9-22.8-103.6-25.4l-51.7-4a34 34 0 0 1-22-10.2l-89-91.7a34 34 0 0 1-6.7-37.7s55-121 57.1-127.3c2-6.3 9.6-61.2 14-90.6 1.2-7.9 5-15 11-20.3L248 8.9a34.1 34.1 0 0 1 49.6 4.3L386 125.6a37 37 0 0 1 7.6 22.4c0 21.3 1.8 65 13.6 93.2 11.5 27.3 32.5 57 43.5 71.5a17.3 17.3 0 0 1 1.3 19.2 1494 1494 0 0 1-44.8 70.6c-15 22.3-21.9 49.9-25 73.1z" fill="#6c31e3"/>
+      <path d="M165.9 478.3c41.4-84 40.2-144.2 22.6-187-16.2-39.6-46.3-64.5-70-80-.6 2.3-1.3 4.4-2.2 6.5L60.6 342a34 34 0 0 0 6.6 37.7l89.1 91.7a34 34 0 0 0 9.6 7z" fill="url(#obsidian-bottom-left)"/>
+      <path d="M278.4 307.8c11.2 1.2 22.2 3.6 32.8 7.6 34 12.7 65 41.2 90.5 96.3 1.8-3.1 3.6-6.2 5.6-9.2a1536 1536 0 0 0 44.8-70.6 17 17 0 0 0-1.3-19.2c-11-14.6-32-44.2-43.5-71.5-11.8-28.2-13.5-72-13.6-93.2 0-8.1-2.6-16-7.6-22.4L297.6 13.2a34 34 0 0 0-1.5-1.7 96 96 0 0 1 2 54 198.3 198.3 0 0 1-17.6 41.3l-7.2 14.2a171 171 0 0 0-19.4 71c-1.2 29.4 4.8 66.4 24.5 115.8z" fill="url(#obsidian-top-right)"/>
+      <path d="M278.4 307.8c-19.7-49.4-25.8-86.4-24.5-115.9a171 171 0 0 1 19.4-71c2.3-4.8 4.8-9.5 7.2-14.1 7.1-13.9 14-27 17.6-41.4a96 96 0 0 0-2-54A34.1 34.1 0 0 0 248 9l-105.4 94.8a34.1 34.1 0 0 0-10.9 20.3l-12.8 85-.5 2.3c23.8 15.5 54 40.4 70.1 80a147 147 0 0 1 7.8 24.8c28-6.8 55.7-11 82.1-8.3z" fill="url(#obsidian-top-left)"/>
+      <path d="M333.6 511c22.7 6.2 45.6-12 48.7-35.4a187 187 0 0 1 19.4-63.9c-25.6-55-56.5-83.6-90.4-96.3-36-13.4-75.2-9-115 .7 8.9 40.4 3.6 93.3-30.4 162.2 4 1.8 8.1 3 12.5 3.3 0 0 24.4 2 53.6 4.1 29 2 72.4 17.1 101.6 25.2z" fill="url(#obsidian-bottom-right)"/>
+      <path d="M254.1 190c-1.3 29.2 2.4 62.8 22.1 112.1l-6.2-.5c-17.7-51.5-21.5-78-20.2-107.6a174.7 174.7 0 0 1 20.4-72c2.4-4.9 8-14.1 10.5-18.8 7.1-13.7 11.9-21 16-33.6 5.7-17.5 4.5-25.9 3.8-34.1 4.6 29.9-12.7 56-25.7 82.4a177.1 177.1 0 0 0-20.7 72z" fill="url(#obsidian-top-edge)"/>
+      <path d="M194.3 293.4c2.4 5.4 4.6 9.8 6 16.5L195 311c-2.1-7.8-3.8-13.4-6.8-20-17.8-42-46.3-63.6-69.7-79.5 28.2 15.2 57.2 39 75.7 81.9z" fill="url(#obsidian-left-edge)"/>
+      <path d="M200.6 315.1c9.8 46-1.2 104.2-33.6 160.9 27.1-56.2 40.2-110.1 29.3-160z" fill="url(#obsidian-bottom-edge)"/>
+      <path d="M312.5 311c53.1 19.9 73.6 63.6 88.9 100-19-38.1-45.2-80.3-90.8-96-34.8-11.8-64.1-10.4-114.3 1l-1.1-5c53.2-12.1 81-13.5 117.3 0z" fill="url(#obsidian-middle-edge)"/>
+    </symbol>
+
+    <!-- Official GitHub Invertocat: https://brand.github.com/GitHub_Logos.zip -->
+    <symbol id="icon-github" viewBox="0 0 98 96">
+      <path fill="#000" d="M41.4395 69.3848C28.8066 67.8535 19.9062 58.7617 19.9062 46.9902C19.9062 42.2051 21.6289 37.0371 24.5 33.5918C23.2559 30.4336 23.4473 23.7344 24.8828 20.959C28.7109 20.4805 33.8789 22.4902 36.9414 25.2656C40.5781 24.1172 44.4062 23.543 49.0957 23.543C53.7852 23.543 57.6133 24.1172 61.0586 25.1699C64.0254 22.4902 69.2891 20.4805 73.1172 20.959C74.457 23.543 74.6484 30.2422 73.4043 33.4961C76.4668 37.1328 78.0937 42.0137 78.0937 46.9902C78.0937 58.7617 69.1934 67.6621 56.3691 69.2891C59.623 71.3945 61.8242 75.9883 61.8242 81.252V91.2051C61.8242 94.0762 64.2168 95.7031 67.0879 94.5547C84.4102 87.9512 98 70.6289 98 49.1914C98 22.1074 75.9883 0 48.9043 0C21.8203 0 0 22.1074 0 49.1914C0 70.4375 13.4941 88.0469 31.6777 94.6504C34.2617 95.6074 36.75 93.8848 36.75 91.3008V83.6445C35.4102 84.2188 33.6875 84.6016 32.1562 84.6016C25.8398 84.6016 22.1074 81.1563 19.4277 74.7441C18.375 72.1602 17.2266 70.6289 15.0254 70.3418C13.877 70.2461 13.4941 69.7676 13.4941 69.1934C13.4941 68.0449 15.4082 67.1836 17.3223 67.1836C20.0977 67.1836 22.4902 68.9063 24.9785 72.4473C26.8926 75.2227 28.9023 76.4668 31.2949 76.4668C33.6875 76.4668 35.2187 75.6055 37.4199 73.4043C39.0469 71.7773 40.291 70.3418 41.4395 69.3848Z"/>
+    </symbol>
+
+    <!-- Official Next.js icon from Vercel's Next.js brand asset package -->
+    <symbol id="icon-nextjs" viewBox="0 0 180 180">
+      <linearGradient id="nextjs-n" x1="109" x2="144.5" y1="116.5" y2="160.5" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <linearGradient id="nextjs-i" x1="121" x2="120.799" y1="54" y2="106.875" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <circle cx="90" cy="90" r="90" fill="#000"/>
+      <path d="M149.508 157.52 69.142 54H54v71.97h12.114V69.384l73.885 95.461a90.7 90.7 0 0 0 9.509-7.325Z" fill="url(#nextjs-n)"/>
+      <rect x="115" y="54" width="12" height="72" fill="url(#nextjs-i)"/>
+    </symbol>
+
+    <!-- Official Cloudflare product icons: cloudflare/cloudflare-docs src/icons -->
+    <symbol id="icon-pages" viewBox="0 0 48 48">
+      <path fill="currentColor" d="m21.375 7.5-1.95 3H9v27h8.7l-.525 3H7.5L6 39V9l1.5-1.5zm9.45 0H40.5L42 9v30l-1.5 1.5H26.625l1.95-3H39v-27h-8.7z"/><path fill="currentColor" d="M21.45 28.5h-8.7l-1.275-2.325 15.6-24 2.7 1.125-3.225 16.2h8.7l1.275 2.325-15.6 24-2.7-1.125zM11.175 13.725a1.05 1.05 0 1 0 0-2.1 1.05 1.05 0 0 0 0 2.1m2.775 0a1.05 1.05 0 1 0 0-2.1 1.05 1.05 0 0 0 0 2.1m2.775 0a1.05 1.05 0 1 0 0-2.1 1.05 1.05 0 0 0 0 2.1"/>
+    </symbol>
+    <symbol id="icon-dns" viewBox="0 0 48 48">
+      <path fill="currentColor" d="M39 30.98h-2.125v-8.574H25.148v-5.449h2.102l1.25-1.25V9l-1.25-1.25h-6.738L19.262 9v6.707l1.25 1.25h2.136v5.45H11.125v8.573H9l-1.25 1.25V39L9 40.25h6.742l1.25-1.25v-6.77l-1.25-1.25h-2.117v-6.074h9.023v6.074h-2.136l-1.25 1.25V39l1.25 1.25h6.738L28.5 39v-6.77l-1.25-1.25h-2.102v-6.074h9.235v6.074h-2.121l-1.25 1.25V39l1.25 1.25H39L40.25 39v-6.77ZM21.762 10.25H26v4.238h-4.238Zm-7.27 27.5H10.25v-4.27h4.238Zm11.508 0h-4.238v-4.27H26Zm11.75 0h-4.238v-4.27h4.238Z"/>
+    </symbol>
+    <symbol id="icon-workers" viewBox="0 0 48 49">
+      <path fill="currentColor" d="m18.63 37.418-9.645-12.9 9.592-12.533-1.852-2.527L5.917 23.595l-.015 1.808 10.86 14.542zM21.997 6.503h-3.712l13.387 18.3-13.072 17.7h3.735L35.4 24.81zM29.175 6.503h-3.758l13.598 18.082-13.598 17.918h3.765l12.908-17.01v-1.808z"/>
+    </symbol>
+    <symbol id="icon-r2" viewBox="0 0 40 40">
+      <path fill="currentColor" fill-rule="evenodd" d="M30.289 6.423c-2.43-.813-5.958-1.362-9.977-1.362-4.018 0-7.545.549-9.976 1.362-1.228.41-2.033.842-2.48 1.195q-.14.111-.204.18c.052.171.196.395.562.67.524.394 1.372.783 2.563 1.119 2.368.666 5.731 1.023 9.536 1.023s7.167-.357 9.535-1.023c1.191-.336 2.04-.725 2.563-1.119.366-.275.51-.499.562-.67a2 2 0 0 0-.204-.18c-.447-.353-1.252-.784-2.48-1.195m-20.24 5.624c-.885-.25-1.71-.552-2.424-.922v4.393c0 .196.097.514.625.941.535.433 1.391.869 2.576 1.252 2.36.764 5.71 1.222 9.486 1.222 3.778 0 7.128-.458 9.487-1.222 1.185-.383 2.041-.82 2.576-1.252.528-.427.625-.745.625-.94v-4.394c-.715.37-1.539.673-2.424.922-2.7.76-6.336 1.124-10.264 1.124s-7.564-.364-10.263-1.124m25.576 3.471V7.622c0-2.829-6.856-5.122-15.313-5.122C11.857 2.5 5 4.793 5 7.622v24.756c0 2.829 6.856 5.122 15.313 5.122 8.456 0 15.312-2.293 15.312-5.122zM33 19.134c-.7.393-1.505.726-2.375 1.008-2.708.877-6.358 1.352-10.313 1.352-3.954 0-7.604-.475-10.312-1.352-.87-.282-1.676-.615-2.375-1.008v4.28c0 .196.097.514.625.942.535.432 1.391.868 2.576 1.252 2.36.763 5.71 1.221 9.486 1.221 3.778 0 7.128-.458 9.487-1.221 1.185-.384 2.041-.82 2.576-1.252.528-.428.625-.746.625-.941v-4.28Zm-23 8.904c-.87-.281-1.676-.615-2.375-1.007v5.143c.044.048.116.117.231.208.447.353 1.252.785 2.48 1.195 2.43.813 5.958 1.362 9.976 1.362s7.546-.549 9.977-1.362c1.228-.41 2.033-.842 2.48-1.195a2 2 0 0 0 .231-.208v-5.143c-.7.392-1.505.726-2.375 1.007-2.708.877-6.358 1.352-10.313 1.352-3.954 0-7.604-.475-10.312-1.352m3.562-15.666c.725 0 1.313-.573 1.313-1.28s-.588-1.281-1.313-1.281c-.724 0-1.312.573-1.312 1.28s.588 1.281 1.313 1.281Zm1.313 6.83c0 .706-.588 1.28-1.313 1.28-.724 0-1.312-.574-1.312-1.28 0-.708.588-1.281 1.313-1.281.724 0 1.312.573 1.312 1.28Zm-1.313 9.176c.725 0 1.313-.573 1.313-1.28s-.588-1.28-1.313-1.28c-.724 0-1.312.572-1.312 1.28 0 .707.588 1.28 1.313 1.28Z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Terraform mark as published in Cloudflare's official product icon set -->
+    <symbol id="icon-terraform" viewBox="0 0 48 55">
+      <path fill="currentColor" d="m16.542 9.612 14.91 8.61v17.214l-14.91-8.606zM33.089 18.221v17.215l14.91-8.606V9.612zM0 0v17.219l14.91 8.61V8.608zM16.542 45.93l14.91 8.61V37.325l-14.91-8.61z"/>
+    </symbol>
+
+    <symbol id="icon-person" viewBox="0 0 48 48">
+      <circle cx="24" cy="15" r="8" fill="none" stroke="currentColor" stroke-width="3"/><path d="M9 42c1.5-9.3 6.5-14 15-14s13.5 4.7 15 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-browser" viewBox="0 0 48 48">
+      <rect x="4" y="7" width="40" height="34" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 16h40" stroke="currentColor" stroke-width="3"/><circle cx="10" cy="11.5" r="1.5" fill="currentColor"/><circle cx="15" cy="11.5" r="1.5" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-folder" viewBox="0 0 48 48">
+      <path d="M5 13a4 4 0 0 1 4-4h10l4 5h16a4 4 0 0 1 4 4v19a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M5 19h38" stroke="currentColor" stroke-width="3"/>
+    </symbol>
+
+    <filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#0f172a" flood-opacity=".10"/></filter>
+    <marker id="arrow-runtime" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#0f4c81"/></marker>
+    <marker id="arrow-automation" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563eb"/></marker>
+    <marker id="arrow-control" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#7c3aed"/></marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", "Segoe UI", sans-serif; fill: #172033; }
+      .title { font-size: 34px; font-weight: 750; letter-spacing: .01em; }
+      .subtitle { font-size: 15px; fill: #5b6474; }
+      .lane-title { font-size: 14px; font-weight: 750; letter-spacing: .12em; }
+      .node-title { font-size: 18px; font-weight: 740; }
+      .node-sub { font-size: 13px; fill: #5b6474; }
+      .small { font-size: 12px; fill: #667085; }
+      .tiny { font-size: 11px; fill: #667085; }
+      .chip { font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+      .edge-label { font-size: 11px; font-weight: 650; }
+      .card { fill: #fff; stroke: #d8dee8; stroke-width: 1.5; rx: 16; filter: url(#shadow); }
+      .mini-card { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1.2; rx: 10; }
+      .runtime { fill: none; stroke: #0f4c81; stroke-width: 2.4; marker-end: url(#arrow-runtime); }
+      .automation { fill: none; stroke: #2563eb; stroke-width: 2.4; stroke-dasharray: 8 6; marker-end: url(#arrow-automation); }
+      .control { fill: none; stroke: #7c3aed; stroke-width: 2.4; stroke-dasharray: 2 7; stroke-linecap: round; marker-end: url(#arrow-control); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#f7f9fc"/>
+  <rect x="0" y="0" width="1600" height="94" fill="#fff"/>
+  <path d="M0 94H1600" stroke="#e4e7ec"/>
+  <text x="46" y="45" class="title">hiramekun.dev システム構成</text>
+  <text x="46" y="72" class="subtitle">1つのモノレポから、プロフィールと Markdown ブログを Cloudflare Pages の2プロジェクトへ静的配信</text>
+  <g transform="translate(1088 28)">
+    <path d="M0 8h46" stroke="#0f4c81" stroke-width="2.4" marker-end="url(#arrow-runtime)"/><text x="58" y="12" class="tiny">閲覧時</text>
+    <path d="M120 8h46" stroke="#2563eb" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#arrow-automation)"/><text x="178" y="12" class="tiny">自動化・配信</text>
+    <path d="M0 36h46" stroke="#7c3aed" stroke-width="2.4" stroke-dasharray="2 7" marker-end="url(#arrow-control)"/><text x="58" y="40" class="tiny">IaC・管理</text>
+  </g>
+
+  <!-- 1. Authoring, repository, and verification -->
+  <rect x="28" y="116" width="1544" height="306" rx="22" fill="#f1f5fb" stroke="#d9e3f0" stroke-width="1.5"/>
+  <rect x="44" y="132" width="245" height="28" rx="14" fill="#dbeafe"/>
+  <text x="58" y="151" class="lane-title" fill="#1d4ed8">1  執筆・バージョン管理・検証</text>
+
+  <rect class="card" x="55" y="190" width="190" height="150"/>
+  <use href="#icon-person" x="79" y="214" width="52" height="52" color="#334155"/>
+  <use href="#icon-obsidian" x="153" y="213" width="55" height="55"/>
+  <text x="150" y="291" text-anchor="middle" class="node-title">Owner + Obsidian</text>
+  <text x="150" y="316" text-anchor="middle" class="node-sub">Markdown を執筆</text>
+
+  <rect class="card" x="315" y="166" width="350" height="206"/>
+  <use href="#icon-folder" x="340" y="190" width="52" height="52" color="#3b506b"/>
+  <text x="409" y="211" class="node-title">Local monorepo</text>
+  <text x="409" y="235" class="node-sub">npm workspaces</text>
+  <rect class="mini-card" x="340" y="260" width="142" height="42"/><text x="411" y="278" text-anchor="middle" class="chip" fill="#4338ca">posts/*.md</text><text x="411" y="294" text-anchor="middle" class="tiny">Obsidian vault</text>
+  <rect class="mini-card" x="497" y="260" width="143" height="42"/><text x="568" y="278" text-anchor="middle" class="chip" fill="#166534">apps/*</text><text x="568" y="294" text-anchor="middle" class="tiny">profile + blog</text>
+  <rect class="mini-card" x="340" y="313" width="142" height="42"/><text x="411" y="331" text-anchor="middle" class="chip" fill="#9a3412">functions/</text><text x="411" y="347" text-anchor="middle" class="tiny">shared middleware</text>
+  <rect class="mini-card" x="497" y="313" width="143" height="42"/><text x="568" y="331" text-anchor="middle" class="chip" fill="#6d28d9">infra/</text><text x="568" y="347" text-anchor="middle" class="tiny">Terraform</text>
+
+  <rect class="card" x="745" y="166" width="310" height="206"/>
+  <use href="#icon-github" x="773" y="193" width="52" height="51"/>
+  <text x="842" y="213" class="node-title">GitHub Repository</text>
+  <text x="842" y="237" class="node-sub">hiramekun/my-blog</text>
+  <text x="773" y="281" class="small">• ソースと記事の正本</text>
+  <text x="773" y="307" class="small">• main が本番ブランチ</text>
+  <text x="773" y="333" class="small">• PR は Pages preview 対象</text>
+  <rect x="961" y="187" width="68" height="24" rx="12" fill="#dcfce7"/><text x="995" y="203" text-anchor="middle" class="chip" fill="#166534">main</text>
+
+  <rect class="card" x="1135" y="166" width="380" height="206"/>
+  <use href="#icon-github" x="1161" y="190" width="45" height="44"/>
+  <text x="1221" y="210" class="node-title">GitHub Actions</text>
+  <rect class="mini-card" x="1161" y="251" width="328" height="48"/>
+  <text x="1178" y="271" class="chip" fill="#1d4ed8">CI — push / pull request</text>
+  <text x="1178" y="290" class="tiny">lint・typecheck・2サイト build・Terraform validate</text>
+  <rect class="mini-card" x="1161" y="309" width="328" height="48"/>
+  <text x="1178" y="329" class="chip" fill="#1d4ed8">Smoke test — 毎日 07:00 JST</text>
+  <text x="1178" y="348" class="tiny">公開中の2サイトと代表記事を HTTP 検証</text>
+
+  <path class="runtime" d="M245 265h70"/><text x="280" y="251" text-anchor="middle" class="edge-label" fill="#0f4c81">編集</text>
+  <path class="automation" d="M665 265h80"/><text x="705" y="251" text-anchor="middle" class="edge-label" fill="#1d4ed8">commit / push</text>
+  <path class="automation" d="M1055 265h80"/><text x="1095" y="251" text-anchor="middle" class="edge-label" fill="#1d4ed8">trigger</text>
+
+  <!-- 2. Cloudflare delivery and runtime -->
+  <rect x="28" y="446" width="1544" height="386" rx="22" fill="#fff8f0" stroke="#fed7aa" stroke-width="1.5"/>
+  <rect x="44" y="462" width="245" height="28" rx="14" fill="#ffedd5"/>
+  <text x="58" y="481" class="lane-title" fill="#c2410c">2  CLOUDFLARE 配信・実行時</text>
+  <text x="1518" y="481" text-anchor="end" class="small">デプロイは GitHub Actions ではなく Pages の Git 連携</text>
+
+  <rect class="card" x="55" y="584" width="170" height="140"/>
+  <use href="#icon-browser" x="111" y="603" width="58" height="58" color="#334155"/>
+  <text x="140" y="684" text-anchor="middle" class="node-title">Visitors</text>
+  <text x="140" y="707" text-anchor="middle" class="node-sub">Web browser</text>
+
+  <rect class="card" x="285" y="584" width="180" height="140"/>
+  <use href="#icon-dns" x="344" y="601" width="62" height="62" color="#f48120"/>
+  <text x="375" y="684" text-anchor="middle" class="node-title">Cloudflare DNS</text>
+  <text x="375" y="707" text-anchor="middle" class="node-sub">proxied CNAME</text>
+
+  <rect class="card" x="525" y="546" width="385" height="216"/>
+  <use href="#icon-workers" x="552" y="574" width="58" height="59" color="#f48120"/>
+  <text x="627" y="590" class="node-title">Pages Functions</text>
+  <text x="627" y="614" class="node-sub">functions/_middleware.ts</text>
+  <rect x="552" y="650" width="330" height="32" rx="16" fill="#fff7ed"/><text x="717" y="671" text-anchor="middle" class="chip" fill="#c2410c">本番 *.pages.dev → 正規ホストへ 301</text>
+  <rect x="552" y="692" width="330" height="32" rx="16" fill="#eff6ff"/><text x="717" y="713" text-anchor="middle" class="chip" fill="#1d4ed8">カスタムドメイン / PR preview → 素通し</text>
+  <text x="717" y="746" text-anchor="middle" class="tiny">同じ middleware を2つの Pages プロジェクトへ配置</text>
+
+  <rect class="card" x="990" y="504" width="510" height="144"/>
+  <use href="#icon-pages" x="1017" y="532" width="61" height="61" color="#f48120"/>
+  <use href="#icon-nextjs" x="1424" y="529" width="48" height="48"/>
+  <text x="1095" y="550" class="node-title">Pages: hiramekun-dev</text>
+  <text x="1095" y="574" class="node-sub">@hiramekun/profile → apps/profile/out</text>
+  <rect x="1017" y="603" width="456" height="26" rx="13" fill="#ecfdf3"/><text x="1245" y="621" text-anchor="middle" class="chip" fill="#166534">https://hiramekun.dev/</text>
+
+  <rect class="card" x="990" y="674" width="510" height="144"/>
+  <use href="#icon-pages" x="1017" y="702" width="61" height="61" color="#f48120"/>
+  <use href="#icon-nextjs" x="1424" y="699" width="48" height="48"/>
+  <text x="1095" y="720" class="node-title">Pages: hiramekun-blog</text>
+  <text x="1095" y="744" class="node-sub">@hiramekun/blog + posts/*.md → apps/blog/out</text>
+  <rect x="1017" y="773" width="456" height="26" rx="13" fill="#ecfdf3"/><text x="1245" y="791" text-anchor="middle" class="chip" fill="#166534">https://blog.hiramekun.dev/</text>
+
+  <path class="runtime" d="M225 654h60"/><text x="255" y="641" text-anchor="middle" class="edge-label" fill="#0f4c81">HTTPS</text>
+  <path class="runtime" d="M465 654h60"/><text x="495" y="641" text-anchor="middle" class="edge-label" fill="#0f4c81">route</text>
+  <path class="runtime" d="M910 616c36 0 38-40 80-40"/><text x="951" y="587" text-anchor="middle" class="edge-label" fill="#0f4c81">pass</text>
+  <path class="runtime" d="M910 708c36 0 38 38 80 38"/><text x="951" y="738" text-anchor="middle" class="edge-label" fill="#0f4c81">pass</text>
+
+  <path class="automation" d="M900 372v74c0 34 315 20 315 58"/>
+  <path class="automation" d="M900 372v74c0 210 315 182 315 228"/>
+  <rect x="934" y="434" width="201" height="28" rx="14" fill="#fff" stroke="#bfdbfe"/><text x="1034" y="453" text-anchor="middle" class="edge-label" fill="#1d4ed8">Pages Git integration: build</text>
+  <path class="automation" d="M1324 372v93c0 20 136 16 136 39"/>
+  <path class="automation" d="M1374 372v220c0 50 86 47 86 82"/>
+  <text x="1459" y="474" text-anchor="end" class="edge-label" fill="#1d4ed8">daily smoke</text>
+
+  <!-- 3. Infrastructure as code -->
+  <rect x="28" y="856" width="1544" height="200" rx="22" fill="#f7f3ff" stroke="#ddd6fe" stroke-width="1.5"/>
+  <rect x="44" y="872" width="255" height="28" rx="14" fill="#ede9fe"/>
+  <text x="58" y="891" class="lane-title" fill="#6d28d9">3  INFRASTRUCTURE AS CODE</text>
+
+  <rect class="card" x="315" y="898" width="260" height="126"/>
+  <use href="#icon-terraform" x="341" y="921" width="49" height="56" color="#7b42bc"/>
+  <text x="410" y="940" class="node-title">Terraform</text>
+  <text x="410" y="965" class="node-sub">infra/*.tf</text>
+  <text x="341" y="1002" class="tiny">Cloudflare provider ~&gt; 5.13</text>
+
+  <rect class="card" x="650" y="898" width="260" height="126"/>
+  <use href="#icon-r2" x="676" y="923" width="53" height="53" color="#f48120"/>
+  <text x="746" y="941" class="node-title">Cloudflare R2</text>
+  <text x="746" y="966" class="node-sub">S3-compatible backend</text>
+  <text x="676" y="1002" class="tiny">prod/terraform.tfstate</text>
+
+  <rect x="985" y="900" width="520" height="122" rx="14" fill="#fff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="1011" y="929" class="chip" fill="#6d28d9">Terraform が Cloudflare API 経由で管理</text>
+  <text x="1011" y="957" class="small">Pages projects / Git source / build commands / environment variables</text>
+  <text x="1011" y="981" class="small">proxied DNS records / custom domains / production + preview settings</text>
+  <text x="1011" y="1005" class="small">R2 backend はインフラ state のみ。記事・アプリデータは保存しない</text>
+
+  <path class="control" d="M575 961h75"/><text x="612" y="948" text-anchor="middle" class="edge-label" fill="#6d28d9">state</text>
+  <path class="control" d="M575 1004c140 58 302 51 410-21"/>
+  <path class="control" d="M1245 900v-68"/>
+
+  <text x="46" y="1080" class="tiny">Icons: Obsidian Brand Guidelines, GitHub Brand Toolkit, Vercel Next.js Brand Assets, Cloudflare official documentation product icons. Product names and marks belong to their respective owners.</text>
+</svg>

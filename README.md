@@ -9,6 +9,12 @@
 | ブログ | <https://blog.hiramekun.dev/> | 技術・教育・社会について考えたことを書く場所 |
 | 技術ノート | <https://notes.hiramekun.dev/> | 別リポジトリ（[tech-notes](https://github.com/hiramekun/tech-notes)） |
 
+## システム構成
+
+![hiramekun.dev のシステム構成図](docs/system-architecture.svg)
+
+実行時・デプロイ・IaC の経路とアイコンの出典は、[システム構成の説明](docs/system-architecture.md)を参照。
+
 ## 構成
 
 ```
