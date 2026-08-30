@@ -10,6 +10,16 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // 各ワークスペースが `eslint .` で走るので、ビルド生成物と Next の自動生成
+  // ファイルを明示的に外す。(next lint が暗黙にやってくれていた分)
+  {
+    ignores: [
+      "**/.next/**",
+      "**/out/**",
+      "**/node_modules/**",
+      "**/next-env.d.ts",
+    ],
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

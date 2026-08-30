@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@import "@hiramekun/theme/globals.css";
+
+/*
+ * 記事本文 (Markdown)。
+ * tech-notes の .card-content と同じ組み方に揃えてある。
+ * https://github.com/hiramekun/tech-notes/blob/main/app/globals.css
+ *
+ * シンタックスハイライトは highlight.js のテーマ CSS を読まず、
+ * theme.css の --note-code-* を使う。ライト/ダークの両方で読めるようにするため。
+ */
+@layer components {
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    color: var(--md-sys-color-on-surface);
+    font-weight: 500;
+    letter-spacing: 0;
+    scroll-margin-top: 12px;
+  }
+
+  .prose h2 {
+    margin: 2em 0 0.8em;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    padding-bottom: 8px;
+    font-size: var(--md-sys-typescale-title-large-size);
+    line-height: var(--md-sys-typescale-title-large-line-height);
+  }
+
+  .prose h3 {
+    margin: 1.7em 0 0.7em;
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .prose h4 {
+    margin: 1.4em 0 0.55em;
+    font-size: var(--md-sys-typescale-title-medium-size);
+    line-height: var(--md-sys-typescale-title-medium-line-height);
+  }
+
+  .prose h2:first-child,
+  .prose h3:first-child {
+    margin-top: 0;
+  }
+
+  .prose p,
+  .prose li {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: var(--md-sys-typescale-body-large-size);
+    line-height: 1.8;
+  }
+
+  .prose p {
+    margin: 0.75em 0;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin: 0.75em 0;
+    padding-left: 1.5em;
+  }
+
+  .prose ul {
+    list-style-type: disc;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+  }
+
+  .prose li {
+    display: list-item;
+  }
+
+  .prose li + li {
+    margin-top: 0.3em;
+  }
+
+  .prose strong {
+    color: var(--md-sys-color-on-surface);
+    font-weight: 500;
+  }
+
+  .prose a {
+    color: var(--md-sys-color-primary);
+    font-weight: 500;
+    text-underline-offset: 3px;
+  }
+
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    margin: 2em 0;
+  }
+
+  .prose blockquote {
+    margin: 1.3em 0;
+    border-left: 4px solid var(--md-sys-color-primary);
+    border-radius: 0 var(--md-sys-shape-corner-small) var(--md-sys-shape-corner-small) 0;
+    background: var(--md-sys-color-surface-container-high);
+    padding: 12px 16px;
+  }
+
+  .prose blockquote p:first-child {
+    margin-top: 0;
+  }
+
+  .prose blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose code {
+    border-radius: var(--md-sys-shape-corner-extra-small);
+    background: var(--md-sys-color-surface-container-highest);
+    padding: 0.15em 0.4em;
+    color: var(--md-sys-color-on-surface);
+    font-family: var(--md-sys-typescale-mono-font);
+    font-size: 0.875em;
+  }
+
+  .prose pre {
+    overflow-x: auto;
+    border-radius: var(--md-sys-shape-corner-medium);
+    background: var(--md-sys-color-surface-container-highest);
+    padding: 16px 18px;
+    margin: 1.5em 0;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .prose pre code {
+    display: block;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    line-height: 1.7;
+    tab-size: 2;
+  }
+
+  /* --- highlight.js --- */
+  .prose .hljs-comment,
+  .prose .hljs-quote {
+    color: var(--note-code-comment);
+    font-style: italic;
+  }
+
+  .prose .hljs-keyword,
+  .prose .hljs-selector-tag,
+  .prose .hljs-doctag {
+    color: var(--note-code-keyword);
+  }
+
+  .prose .hljs-string,
+  .prose .hljs-attr,
+  .prose .hljs-template-tag,
+  .prose .hljs-template-variable {
+    color: var(--note-code-string);
+  }
+
+  .prose .hljs-title,
+  .prose .hljs-title.function_,
+  .prose .hljs-section,
+  .prose .hljs-property {
+    color: var(--note-code-function);
+  }
+
+  .prose .hljs-title.class_,
+  .prose .hljs-type,
+  .prose .hljs-built_in {
+    color: var(--note-code-type);
+  }
+
+  .prose .hljs-number,
+  .prose .hljs-literal,
+  .prose .hljs-symbol,
+  .prose .hljs-bullet {
+    color: var(--note-code-number);
+  }
+
+  .prose .hljs-variable,
+  .prose .hljs-params,
+  .prose .hljs-selector-class,
+  .prose .hljs-selector-id {
+    color: var(--note-code-variable);
+  }
+
+  .prose .hljs-meta,
+  .prose .hljs-meta .hljs-keyword {
+    color: var(--note-code-meta);
+  }
+
+  .prose .hljs-regexp,
+  .prose .hljs-link {
+    color: var(--note-code-keyword);
+  }
+
+  .prose .hljs-addition {
+    background: color-mix(in srgb, var(--note-code-addition) 14%, transparent);
+    color: var(--note-code-addition);
+  }
+
+  .prose .hljs-deletion {
+    background: color-mix(in srgb, var(--note-code-deletion) 14%, transparent);
+    color: var(--note-code-deletion);
+  }
+
+  .prose .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .prose .hljs-strong {
+    font-weight: 700;
+  }
+
+  /* --- 表 --- */
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: var(--md-sys-typescale-body-medium-size);
+  }
+
+  .prose th,
+  .prose td {
+    border: 1px solid var(--md-sys-color-outline-variant);
+    padding: 10px 12px;
+    color: var(--md-sys-color-on-surface-variant);
+    text-align: left;
+  }
+
+  .prose th {
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    font-weight: 500;
+  }
+
+  /* --- 脚注 (remark-gfm) --- */
+  .prose .footnotes {
+    margin-top: 2.5em;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    padding-top: 1em;
+  }
+
+  .prose .footnotes h2 {
+    margin-top: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+    font-size: var(--md-sys-typescale-title-medium-size);
+    line-height: var(--md-sys-typescale-title-medium-line-height);
+  }
+
+  .prose .footnotes li p {
+    display: inline;
+    margin: 0;
+  }
+
+  .prose a[href^="#user-content-fn"] {
+    font-size: 0.8em;
+    font-weight: 700;
+    vertical-align: super;
+  }
+}

@@ -2,10 +2,16 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "dev",
+      "name": "blog",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": ["run", "dev:blog"],
       "port": 3000
+    },
+    {
+      "name": "profile",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:profile"],
+      "port": 3001
     }
   ]
 }

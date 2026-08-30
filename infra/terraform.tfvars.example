@@ -1,0 +1,7 @@
+# cp terraform.tfvars.example terraform.tfvars して埋める。
+# terraform.tfvars は .gitignore 済み。
+#
+# ホスト名・プロジェクト名・GitHub のリポジトリはすべて variables.tf の
+# default で足りるので、ここに書くのは環境固有の 2 つだけでよい。
+account_id = "0123456789abcdef0123456789abcdef"
+zone_id    = "hiramekun.dev のゾーン ID"

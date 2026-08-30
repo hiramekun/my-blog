@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+apps/*/.next/
+apps/*/out/
 
 # production
 /build
@@ -42,3 +44,17 @@ next-env.d.ts
 
 # claude settings
 .claude/settings.local.json
+
+# Terraform (.terraform.lock.hcl はコミットする)
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/terraform.tfvars
+infra/backend.hcl
+
+# wrangler
+.wrangler/
+
+# mise のローカル設定(Cloudflare / R2 の認証情報を置く)
+mise.local.toml
+.mise.local.toml
