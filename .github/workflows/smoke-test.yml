@@ -1,0 +1,45 @@
+name: Smoke Test
+
+# 公開中の 2 サイトが生きているかを毎日確かめる。
+# デプロイは Cloudflare Pages 側で走るため、push に紐づけると
+# 反映前のサイトを叩いてしまう。時刻を決めて回すほうが素直。
+on:
+  schedule:
+    - cron: '0 22 * * *' # 07:00 JST
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check pages
+        run: |
+          set -u
+          failed=0
+
+          check() {
+            local url="$1" expected="$2"
+            local status
+            status=$(curl -sS -o /tmp/body -w '%{http_code}' --max-time 20 "$url") || status="000"
+
+            if [ "$status" != "200" ]; then
+              echo "❌ $url -> HTTP $status"
+              failed=1
+              return
+            fi
+
+            if ! grep -q "$expected" /tmp/body; then
+              echo "❌ $url は 200 だが '$expected' を含まない"
+              failed=1
+              return
+            fi
+
+            echo "✅ $url"
+          }
+
+          check "https://hiramekun.dev/" "hiramekun"
+          check "https://blog.hiramekun.dev/" "ひらめのブログ"
+          check "https://blog.hiramekun.dev/posts/llm-thoughts/" "ひらめのブログ"
+
+          exit "$failed"
