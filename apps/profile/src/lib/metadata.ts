@@ -10,12 +10,17 @@ export function generateSiteMetadata(): Metadata {
     title: TITLE,
     description: DESCRIPTION,
     icons: {
+      // ブログと同じアイコン。実体は packages/theme/icon.svg で、
+      // PNG も含めて `npm run icons` が生成する
       icon: [
-        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { url: '/icon.svg', type: 'image/svg+xml' },
         { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       ],
+      apple: '/apple-touch-icon.png',
       shortcut: '/favicon-32x32.png',
     },
+    manifest: '/site.webmanifest',
     openGraph: {
       title: TITLE,
       description: DESCRIPTION,

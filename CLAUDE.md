@@ -88,6 +88,22 @@ GitHub Actions はデプロイしない。
 - **シンタックスハイライト**: highlight.js のテーマ CSS は読まず `--note-code-*` を使う
   （ライト／ダークの両方で読めるようにするため）
 
+### アイコン
+- **マスターは `packages/theme/icon.svg`**（ヒラメ + 閃きの光線）。**2 サイト共通**で使う
+- favicon / apple-touch-icon / maskable / OGP は `npm run icons` で生成する。
+  **生成物もコミットする**（CI では走らせない）。`rsvg-convert` が要る:
+  `brew install librsvg`
+- maskable だけ一段小さい。ヒラメは横長なので、Android が円や雫に切り抜いたとき
+  尾と光線が欠けないよう中央 80% に収めている
+- ヘッダーの記名は `apps/blog/src/components/BrandMark.tsx`。ライト／ダークで色を
+  変えるためインライン SVG で持つ。**マスターと同じ形なので、片方を直したら両方直す**
+- **`profile.png` は「人」、アイコンは「サイト」**。プロフィール欄のアバターと
+  ヘッダーの記名は役割が違うので混ぜない。profile のリンクカードにも入れない
+  （自分のサイトだけロゴ付きになると外部サービスと不揃いになる。
+  [docs/third-party-logos.md](docs/third-party-logos.md) と同じ判断）
+- OGP はブログだけ 1200x630 のダーク 1 枚（ソースは `apps/blog/assets/og-default.svg`、
+  `summary_large_image`）。プロフィールは人のページなので `summary` + アバターのまま
+
 ### 記事の処理フロー
 1. `posts/` の Markdown を `gray-matter` でパース
 2. `react-markdown` で安全にレンダリング（XSS 対策）

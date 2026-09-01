@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="hiramekun">
+  <!--
+    hiramekun.dev のアイコン（ヒラメ + 閃きの光線）のマスター。
+    2 サイトで共有し、favicon / apple-touch-icon / maskable は
+    scripts/generate-icons.mjs がこのファイルから生成する。直接 public/ の
+    PNG を編集しないこと。色は packages/theme/theme.css のトークンと同じ値。
+  -->
+  <style>
+    .ink { fill: #1a1c15; }
+    .ray { stroke: #506628; }
+    .eye { fill: #fafaee; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #e3e3d8; }
+      .ray { stroke: #b6d086; }
+      .eye { fill: #12140e; }
+    }
+  </style>
+  <g class="ray" fill="none" stroke-width="7" stroke-linecap="round">
+    <path d="M9 22 L19 32"/>
+    <path d="M30 8 L34 21"/>
+    <path d="M2 47 L15 46"/>
+  </g>
+  <path class="ink" d="M66 60 L97 32 Q89 60 97 88 Z"/>
+  <ellipse class="ink" cx="42" cy="60" rx="30" ry="22"/>
+  <circle class="eye" cx="28" cy="52" r="5"/>
+  <circle class="eye" cx="43" cy="48" r="5"/>
+</svg>

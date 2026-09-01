@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!--
+    OGP (og:image / twitter:image) のソース。scripts/generate-icons.mjs が
+    public/og-default.png に焼く。色は packages/theme/theme.css のダーク側トークン。
+    テキストを含むので、生成し直したら字形を目で確認すること。
+  -->
+  <rect width="1200" height="630" fill="#12140e"/>
+
+  <!-- 背景に沈めたヒラメ。光線を入れると散らかるので体と尾だけ。目は背景色で抜く -->
+  <g transform="translate(820 232) scale(4.6)">
+    <path fill="#1e2019" d="M66 60 L97 32 Q89 60 97 88 Z"/>
+    <ellipse fill="#1e2019" cx="42" cy="60" rx="30" ry="22"/>
+    <circle fill="#12140e" cx="28" cy="52" r="5"/>
+    <circle fill="#12140e" cx="43" cy="48" r="5"/>
+  </g>
+
+  <g transform="translate(491 88) scale(2.2)">
+    <g fill="none" stroke="#b6d086" stroke-width="7" stroke-linecap="round">
+      <path d="M9 22 L19 32"/>
+      <path d="M30 8 L34 21"/>
+      <path d="M2 47 L15 46"/>
+    </g>
+    <path fill="#e3e3d8" d="M66 60 L97 32 Q89 60 97 88 Z"/>
+    <ellipse fill="#e3e3d8" cx="42" cy="60" rx="30" ry="22"/>
+    <circle fill="#12140e" cx="28" cy="52" r="5"/>
+    <circle fill="#12140e" cx="43" cy="48" r="5"/>
+  </g>
+
+  <text x="600" y="412" text-anchor="middle" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Noto Sans JP, sans-serif" font-size="62" font-weight="700" fill="#e3e3d8">ひらめのブログ</text>
+  <text x="600" y="474" text-anchor="middle" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Noto Sans JP, sans-serif" font-size="30" fill="#c5c8b9">日々の思考や学びを記録するブログ</text>
+  <text x="600" y="556" text-anchor="middle" font-family="Menlo, ui-monospace, monospace" font-size="26" fill="#b6d086">blog.hiramekun.dev</text>
+</svg>
