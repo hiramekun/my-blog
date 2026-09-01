@@ -5,7 +5,7 @@ import { SITES } from '@/lib/sites';
 export default function Header() {
   return (
     <header className="md-surface-container-high sticky top-0 z-10">
-      <div className="max-w-7xl mx-auto px-4 py-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="brand -ml-1">
             <Image

@@ -15,7 +15,7 @@ export default function Sidebar() {
   return (
     <aside className="w-full lg:w-80 space-y-6">
       {/* プロフィール */}
-      <div className="md-card p-6">
+      <div className="md-card p-4 sm:p-6">
         <h3 className="md-title-medium md-on-surface mb-4">プロフィール</h3>
         <div className="flex items-center gap-3 mb-4">
           <div className="md-surface-container-high h-16 w-16 overflow-hidden rounded-full">
@@ -39,7 +39,7 @@ export default function Sidebar() {
 
       {/* アーカイブ */}
       {Object.keys(archives).length > 0 && (
-        <div className="md-card p-6">
+        <div className="md-card p-4 sm:p-6">
           <h3 className="md-title-medium md-on-surface mb-3">アーカイブ</h3>
           <ul className="space-y-1">
             {Object.entries(archives)
@@ -65,7 +65,7 @@ export default function Sidebar() {
       )}
 
       {/* 最近の記事 */}
-      <div className="md-card p-6">
+      <div className="md-card p-4 sm:p-6">
         <h3 className="md-title-medium md-on-surface mb-3">最近の記事</h3>
         <ul className="space-y-1">
           {allPosts.slice(0, 5).map((post) => (

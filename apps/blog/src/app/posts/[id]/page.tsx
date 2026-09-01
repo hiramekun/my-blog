@@ -35,7 +35,7 @@ export default async function Post({ params }: { params: Params }) {
 
   return (
     <PageLayout showBackLink>
-      <article className="md-card p-8">
+      <article className="md-card p-4 sm:p-8">
         <header className="mb-8">
           <h1 className="md-headline-large md-on-surface mb-4">{postData.title}</h1>
           <div className="flex items-center flex-wrap gap-x-4 gap-y-2">

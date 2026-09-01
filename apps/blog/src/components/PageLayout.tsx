@@ -14,7 +14,7 @@ export default function PageLayout({ children, showBackLink = false }: PageLayou
     <div className="md-surface min-h-screen">
       <Header />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* メインコンテンツ */}
           <main className="flex-1">

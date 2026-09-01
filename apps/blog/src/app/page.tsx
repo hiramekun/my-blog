@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <PageLayout>
       {allPostsData.length === 0 ? (
-        <div className="md-card p-8 text-center">
+        <div className="md-card p-4 sm:p-8 text-center">
           <p className="md-body-large md-on-surface-variant">
             まだ記事がありません。postsフォルダにMarkdownファイルを追加してください。
           </p>
@@ -16,7 +16,7 @@ export default function Home() {
       ) : (
         <div className="space-y-6">
           {allPostsData.map(({ id, date, title, excerpt, tags }) => (
-            <article key={id} className="md-card md-card--interactive p-6">
+            <article key={id} className="md-card md-card--interactive p-4 sm:p-6">
               <Link href={`/posts/${id}`} className="block">
                 <h2 className="md-headline-small md-on-surface md-link-text mb-2">{title}</h2>
               </Link>

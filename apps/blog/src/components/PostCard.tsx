@@ -8,7 +8,7 @@ interface PostCardProps {
 // アーカイブ・カテゴリ一覧で使う記事カード
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <article className="md-card p-6">
+    <article className="md-card p-4 sm:p-6">
       <h2 className="md-headline-small mb-3">
         <Link href={`/posts/${post.id}`} className="md-on-surface md-link-text">
           {post.title}
