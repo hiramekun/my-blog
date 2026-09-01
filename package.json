@@ -14,6 +14,7 @@
     "build": "npm run build --workspaces --if-present",
     "build:blog": "npm run build -w @hiramekun/blog",
     "build:profile": "npm run build -w @hiramekun/profile",
+    "icons": "node scripts/generate-icons.mjs",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present && tsc --noEmit -p functions/tsconfig.json"
   },

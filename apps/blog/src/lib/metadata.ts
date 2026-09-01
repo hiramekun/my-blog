@@ -12,11 +12,12 @@ export const SITE_CONFIG = {
   xCreator: '@hiramekun_eng',
   locale: 'ja_JP',
   image: {
-    // width/height は public/profile.png の実サイズと必ず合わせること
-    url: '/profile.png',
-    width: 460,
-    height: 460,
-    alt: 'ひらめのブログのプロフィール画像',
+    // ソースは apps/blog/assets/og-default.svg。`npm run icons` で焼き直す。
+    // width/height は public/og-default.png の実サイズと必ず合わせること
+    url: '/og-default.png',
+    width: 1200,
+    height: 630,
+    alt: 'ひらめのブログ',
   },
 } as const;
 
@@ -55,12 +56,17 @@ export function generateSiteMetadata(options: MetadataOptions = {}): Metadata {
     title: fullTitle,
     description,
     icons: {
+      // SVG を先に置く。対応ブラウザはこちらを取り、タブがダークなら色が反転する。
+      // 実体は packages/theme/icon.svg で、PNG も含め `npm run icons` が生成する
       icon: [
-        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { url: '/icon.svg', type: 'image/svg+xml' },
         { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       ],
+      apple: '/apple-touch-icon.png',
       shortcut: '/favicon-32x32.png',
     },
+    manifest: '/site.webmanifest',
     openGraph: {
       title,
       description,
@@ -73,7 +79,8 @@ export function generateSiteMetadata(options: MetadataOptions = {}): Metadata {
       images,
     },
     twitter: {
-      card: 'summary',
+      // 記事は 1200x630 のバナーで出す。summary だと画像もタイトルも潰れる
+      card: 'summary_large_image',
       title,
       description,
       creator: SITE_CONFIG.xCreator,

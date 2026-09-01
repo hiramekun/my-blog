@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import BrandMark from '@/components/BrandMark';
 import { SITES } from '@/lib/sites';
 
 export default function Header() {
@@ -8,14 +8,8 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="brand -ml-1">
-            <Image
-              src="/profile.png"
-              alt=""
-              width={40}
-              height={40}
-              priority
-              className="brand-mark"
-            />
+            {/* 丸い塗りは要らないので、.brand-mark の背景だけ落とす */}
+            <BrandMark className="brand-mark bg-transparent" />
             <span>
               <strong className="md-title-medium md-on-surface block">ひらめのブログ</strong>
               <small className="md-label-medium md-on-surface-variant hidden sm:block">
