@@ -261,3 +261,24 @@
     vertical-align: super;
   }
 }
+
+/*
+ * 記事のシェア導線 (components/ShareButtons.tsx)。
+ * ボタン自体は .md-chip--outlined をそのまま使い、
+ * ここではブックマーク数のバッジだけ足す。
+ */
+@layer components {
+  .share-count {
+    display: inline-block;
+    min-width: 20px;
+    border-radius: var(--md-sys-shape-corner-full);
+    background: var(--md-sys-color-secondary-container);
+    padding: 0 6px;
+    color: var(--md-sys-color-on-secondary-container);
+    font-size: var(--md-sys-typescale-label-medium-size);
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+}
