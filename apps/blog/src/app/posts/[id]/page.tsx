@@ -6,6 +6,7 @@ import remarkBreaks from 'remark-breaks';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import PageLayout from '@/components/PageLayout';
+import ShareButtons from '@/components/ShareButtons';
 import type { Metadata } from 'next';
 
 type Params = Promise<{ id: string }>;
@@ -67,6 +68,10 @@ export default async function Post({ params }: { params: Params }) {
             {postData.content}
           </ReactMarkdown>
         </div>
+
+        <footer className="mt-10 pt-6 md-outline-variant-border border-t">
+          <ShareButtons title={postData.title} path={`/posts/${id}/`} />
+        </footer>
       </article>
     </PageLayout>
   );
