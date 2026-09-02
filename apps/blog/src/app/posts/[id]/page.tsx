@@ -53,10 +53,6 @@ export default async function Post({ params }: { params: Params }) {
               </div>
             )}
           </div>
-
-          <div className="mt-6 pt-4 md-outline-variant-border border-t">
-            <ShareButtons title={postData.title} path={`/posts/${id}/`} />
-          </div>
         </header>
 
         {/*
@@ -72,6 +68,10 @@ export default async function Post({ params }: { params: Params }) {
             {postData.content}
           </ReactMarkdown>
         </div>
+
+        <footer className="mt-10 pt-6 md-outline-variant-border border-t">
+          <ShareButtons title={postData.title} path={`/posts/${id}/`} />
+        </footer>
       </article>
     </PageLayout>
   );
