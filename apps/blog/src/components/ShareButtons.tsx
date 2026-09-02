@@ -58,9 +58,11 @@ export default function ShareButtons({ title, path }: ShareButtonsProps) {
   const url = `${SITE_CONFIG.baseUrl}${path}`;
   const count = useHatenaCount(url);
 
+  // ?url= は X が本文の末尾に付けるので、メンションを URL の後ろに置きたいなら
+  // 本文をこちらで組み立てるしかない。URL は text に入れてもカードになる
   const xUrl = `https://x.com/intent/post?text=${encodeURIComponent(
-    `${title} ${SITE_CONFIG.xCreator}`
-  )}&url=${encodeURIComponent(url)}`;
+    `${title} ${url} ${SITE_CONFIG.xCreator}`
+  )}`;
   // ?url= 形式ならエスケープを自分で組み立てなくてよい。コメント一覧とブックマーク追加の両方がある
   const hatenaUrl = `https://b.hatena.ne.jp/entry?url=${encodeURIComponent(url)}`;
 
